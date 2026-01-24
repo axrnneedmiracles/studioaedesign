@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import LightPillar from '@/components/light-pillar';
-import { Header } from '@/components/layout/header';
 
 export const metadata: Metadata = {
   title: 'Studio Noir',
@@ -44,7 +43,6 @@ export default function RootLayout({
         <div className="fixed inset-0 bg-black/70 -z-10" />
 
         <div className="relative z-0 flex flex-col min-h-screen">
-          <Header />
           <main className="flex-grow">{children}</main>
         </div>
         <Toaster />
