@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import Prism from '@/components/prism';
+import GradientBlinds from '@/components/gradient-blinds';
 
 export const metadata: Metadata = {
   title: 'Studio Noir',
@@ -27,16 +27,19 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
         <div className="fixed inset-0 -z-20">
-          <Prism
-            animationType="3drotate"
-            timeScale={0.5}
-            height={3.5}
-            baseWidth={5.5}
-            scale={3.6}
-            hueShift={0}
-            colorFrequency={1}
-            noise={0}
-            glow={1}
+          <GradientBlinds
+            gradientColors={['#FF9FFC', '#5227FF']}
+            angle={0}
+            noise={0.3}
+            blindCount={12}
+            blindMinWidth={50}
+            spotlightRadius={0.5}
+            spotlightSoftness={1}
+            spotlightOpacity={1}
+            mouseDampening={0.15}
+            distortAmount={0}
+            shineDirection="left"
+            mixBlendMode="lighten"
           />
         </div>
         <div className="fixed inset-0 bg-black/70 -z-10" />
