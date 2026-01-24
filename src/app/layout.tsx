@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/header';
-import { Footer } from '@/components/layout/footer';
 import GradientBlinds from '@/components/gradient-blinds';
 
 export const metadata: Metadata = {
@@ -47,7 +46,6 @@ export default function RootLayout({
         <div className="relative z-0 flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow">{children}</main>
-          <Footer />
         </div>
         <Toaster />
       </body>
