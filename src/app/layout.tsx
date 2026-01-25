@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import LightPillar from '@/components/light-pillar';
 import StaggeredMenu from '@/components/staggered-menu';
+import SplashCursor from '@/components/splash-cursor';
 
 export const metadata: Metadata = {
   title: 'Studio Noir',
@@ -39,6 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
+        <SplashCursor />
         <StaggeredMenu
             isFixed={true}
             items={menuItems}
