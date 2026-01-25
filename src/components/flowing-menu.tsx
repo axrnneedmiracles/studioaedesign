@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState, type MouseEvent } from 'react';
 import { gsap } from 'gsap';
+import Link from 'next/link';
 
 type FlowingMenuItemData = {
   link: string;
@@ -97,7 +98,7 @@ function MenuItem({
     };
   }, [text, image, repetitions, speed]);
 
-  const handleMouseEnter = (ev: MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseEnter = (ev: MouseEvent) => {
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
     const rect = itemRef.current.getBoundingClientRect();
     const edge = findClosestEdge(ev.clientX - rect.left, ev.clientY - rect.top, rect.width, rect.height);
@@ -109,7 +110,7 @@ function MenuItem({
       .to([marqueeRef.current, marqueeInnerRef.current], { y: '0%' }, 0);
   };
 
-  const handleMouseLeave = (ev: MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseLeave = (ev: MouseEvent) => {
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
     const rect = itemRef.current.getBoundingClientRect();
     const edge = findClosestEdge(ev.clientX - rect.left, ev.clientY - rect.top, rect.width, rect.height);
@@ -125,16 +126,16 @@ function MenuItem({
       className="flex-1 relative overflow-hidden text-center"
       ref={itemRef}
       style={{ borderTop: isFirst ? 'none' : `1px solid ${borderColor}` }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <a
-        className="flex items-center justify-center h-full relative cursor-pointer uppercase no-underline font-semibold text-[4vh]"
+      <Link
+        className="flex items-center justify-center h-full relative cursor-pointer uppercase no-underline font-semibold text-[4vh] z-10"
         href={link}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         style={{ color: textColor }}
       >
         {text}
-      </a>
+      </Link>
       <div
         className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none translate-y-[101%]"
         ref={marqueeRef}
