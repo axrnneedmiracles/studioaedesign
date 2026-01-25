@@ -1,5 +1,4 @@
 import FlowingMenu from '@/components/flowing-menu';
-import { projects } from '@/lib/data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,11 +7,48 @@ export const metadata: Metadata = {
 };
 
 export default function PortfolioPage() {
-  const menuItems = projects.map((project) => ({
-    link: `/portfolio/${project.slug}`,
-    text: project.title,
-    image: project.coverImage.url,
-  }));
+  const menuItems = [
+    {
+      link: '/portfolio/blender',
+      text: 'Blender',
+      image: '/blender_logo.png',
+    },
+    {
+      link: '/portfolio/davinci',
+      text: 'DaVinci Resolve',
+      image: '/davinci_logo.png',
+    },
+    {
+      link: '/portfolio/canva',
+      text: 'Canva',
+      image: '/canva_logo.png',
+    },
+    {
+      link: '/portfolio/after-effects',
+      text: 'After Effects',
+      image: '/aftereffects_logo.png',
+    },
+    {
+      link: '/portfolio/houdini',
+      text: 'Houdini',
+      image: '/h_logo.png',
+    },
+    {
+      link: '/portfolio/web-dev',
+      text: 'Web Dev',
+      image: '/webdev_logo.png',
+    },
+    {
+      link: '/portfolio/unity',
+      text: 'Unity',
+      image: '/unity_logo.png',
+    },
+    {
+      link: '/portfolio/fl-studio',
+      text: 'FL Studio',
+      image: 'https://picsum.photos/seed/flstudio/600/400', // Placeholder
+    },
+  ];
 
   return (
     <div className="h-screen w-full">

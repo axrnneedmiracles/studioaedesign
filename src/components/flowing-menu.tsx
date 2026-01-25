@@ -54,9 +54,9 @@ function MenuItem({
   useEffect(() => {
     const calculateRepetitions = () => {
       if (!marqueeInnerRef.current) return;
-      const marqueeContent = marqueeInnerRef.current.querySelector('.marquee-part');
+      const marqueeContent = marqueeInnerRef.current.querySelector<HTMLDivElement>('.marquee-part');
       if (!marqueeContent) return;
-      const contentWidth = marqueeContent.getBoundingClientRect().width;
+      const contentWidth = marqueeContent.offsetWidth;
       if (contentWidth === 0) return;
       const viewportWidth = window.innerWidth;
       const needed = Math.ceil(viewportWidth / contentWidth) + 2;
@@ -71,9 +71,9 @@ function MenuItem({
   useEffect(() => {
     const setupMarquee = () => {
       if (!marqueeInnerRef.current) return;
-      const marqueeContent = marqueeInnerRef.current.querySelector('.marquee-part');
+      const marqueeContent = marqueeInnerRef.current.querySelector<HTMLDivElement>('.marquee-part');
       if (!marqueeContent) return;
-      const contentWidth = marqueeContent.getBoundingClientRect().width;
+      const contentWidth = marqueeContent.offsetWidth;
       if (contentWidth === 0) return;
 
       if (animationRef.current) {
@@ -88,7 +88,7 @@ function MenuItem({
       });
     };
 
-    const timer = setTimeout(setupMarquee, 100);
+    const timer = setTimeout(setupMarquee, 50);
     return () => {
       clearTimeout(timer);
       if (animationRef.current) {
