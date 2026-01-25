@@ -1,7 +1,6 @@
 'use client';
 
 import AnimatedList from '@/components/animated-list';
-import Hyperspeed from '@/components/hyperspeed';
 
 const portfolioItems = [
     { name: 'BLENDER', slug: 'blender' },
@@ -23,19 +22,11 @@ export default function PortfolioPage() {
   }
 
   return (
-    <div className="w-screen h-screen relative">
-       <div className="absolute inset-0 z-0">
-        <Hyperspeed />
-       </div>
-       <div className="w-full h-full flex items-center justify-center relative z-10">
-        <AnimatedList
-          items={portfolioItems.map(item => item.name)}
-          onItemSelect={handleSelect}
-          showGradients
-          enableArrowNavigation
-          displayScrollbar={false}
-        />
-      </div>
+    <div className="w-screen h-screen flex items-center justify-center">
+      <AnimatedList
+        items={portfolioItems.map(item => item.name)}
+        onItemSelect={handleSelect}
+      />
     </div>
   );
 }
