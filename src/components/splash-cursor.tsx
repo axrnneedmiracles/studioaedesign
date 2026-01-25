@@ -20,7 +20,7 @@ interface Pointer {
 function SplashCursor({
   SIM_RESOLUTION = 128,
   DYE_RESOLUTION = 1024,
-  DENSITY_DISSIPATION = 1,
+  DENSITY_DISSIPATION = 2,
   VELOCITY_DISSIPATION = 0.2,
   PRESSURE = 0.8,
   PRESSURE_ITERATIONS = 20,
@@ -833,9 +833,9 @@ function SplashCursor({
     
     function generateColor() {
         let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-        c.r *= 0.15;
-        c.g *= 0.15;
-        c.b *= 0.15;
+        c.r *= 0.075;
+        c.g *= 0.075;
+        c.b *= 0.075;
         return c;
     }
     
