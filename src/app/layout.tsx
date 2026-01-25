@@ -40,7 +40,11 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
-        <SplashCursor />
+        <SplashCursor
+          SPLAT_FORCE={3000}
+          DENSITY_DISSIPATION={4}
+          SPLAT_RADIUS={0.2}
+        />
         <StaggeredMenu
             isFixed={true}
             items={menuItems}
