@@ -32,7 +32,7 @@ function SplashCursor({
   COLOR_UPDATE_SPEED = 10,
   PAUSED = false,
   BACK_COLOR = { r: 0, g: 0, b: 0 },
-  TRANSPARENT = false
+  TRANSPARENT = true
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number>();
@@ -96,8 +96,8 @@ function SplashCursor({
 
         if (!gl) return {gl: null, ext: {}};
 
-        let halfFloat: OES_texture_half_float | null;
-        let supportLinearFiltering: OES_texture_float_linear | null;
+        let halfFloat: OES_texture_half_float | null = null;
+        let supportLinearFiltering: OES_texture_float_linear | null = null;
 
         if (isWebGL2) {
             gl.getExtension('EXT_color_buffer_float');
@@ -162,7 +162,11 @@ function SplashCursor({
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, 4, 4, 0, format, type, null);
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
-        return gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
+        const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        gl.deleteTexture(texture);
+        gl.deleteFramebuffer(fbo);
+        return status === gl.FRAMEBUFFER_COMPLETE;
     }
 
     class Material {
@@ -187,19 +191,23 @@ function SplashCursor({
     
             let program = this.programs[hash];
             if (program == null) {
-                let fragmentShader = compileShader(gl.FRAGMENT_SHADER, this.fragmentShaderSource, keywords);
+                const fragmentShader = compileShader(gl.FRAGMENT_SHADER, this.fragmentShaderSource, keywords);
                 program = createProgram(this.vertexShader, fragmentShader);
-                this.programs[hash] = program;
+                if(program) {
+                    this.programs[hash] = program;
+                }
             }
     
-            if (program === this.activeProgram) return;
-    
-            this.uniforms = getUniforms(program);
-            this.activeProgram = program;
+            if (program && program !== this.activeProgram) {
+                this.uniforms = getUniforms(program);
+                this.activeProgram = program;
+            }
         }
     
         bind() {
-            gl.useProgram(this.activeProgram);
+            if(this.activeProgram) {
+              gl.useProgram(this.activeProgram);
+            }
         }
     }
 
@@ -208,7 +216,7 @@ function SplashCursor({
         program: WebGLProgram;
 
         constructor(vertexShader: WebGLShader, fragmentShader: WebGLShader) {
-            this.program = createProgram(vertexShader, fragmentShader);
+            this.program = createProgram(vertexShader, fragmentShader)!;
             this.uniforms = getUniforms(this.program);
         }
         bind() {
@@ -218,7 +226,7 @@ function SplashCursor({
 
     function createProgram(vertexShader: WebGLShader, fragmentShader: WebGLShader) {
         let program = gl.createProgram();
-        if (!program) throw new Error("Failed to create program");
+        if (!program) return null;
         gl.attachShader(program, vertexShader);
         gl.attachShader(program, fragmentShader);
         gl.linkProgram(program);
@@ -239,14 +247,16 @@ function SplashCursor({
         return uniforms;
     }
 
-    function compileShader(type: number, source: string, keywords: string[] | null = null) {
+    function compileShader(type: number, source: string, keywords: string[] | null = null) : WebGLShader | null {
         source = addKeywords(source, keywords);
         const shader = gl.createShader(type);
-        if (!shader) throw new Error("Failed to create shader");
+        if (!shader) return null;
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS))
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
             console.trace(gl.getShaderInfoLog(shader));
+            return null;
+        }
         return shader;
     };
 
@@ -276,8 +286,8 @@ function SplashCursor({
             vB = vUv - vec2(0.0, texelSize.y);
             gl_Position = vec4(aPosition, 0.0, 1.0);
         }
-    `);
-
+    `)!;
+    
     const clearShader = compileShader(gl.FRAGMENT_SHADER, `
         precision mediump float;
         precision mediump sampler2D;
@@ -287,7 +297,7 @@ function SplashCursor({
         void main () {
             gl_FragColor = value * texture2D(uTexture, vUv);
         }
-    `);
+    `)!;
     
     const displayShaderSource = `
         precision highp float;
@@ -317,7 +327,7 @@ function SplashCursor({
             vec3 base = texture2D(uTarget, vUv).xyz;
             gl_FragColor = vec4(base + splat, 1.0);
         }
-    `);
+    `)!;
 
     const advectionShader = compileShader(gl.FRAGMENT_SHADER, `
         precision highp float;
@@ -334,7 +344,7 @@ function SplashCursor({
             float decay = 1.0 + dissipation * dt;
             gl_FragColor = result / decay;
         }
-    `, ext.supportLinearFiltering ? null : ['MANUAL_FILTERING']);
+    `, ext.supportLinearFiltering ? null : ['MANUAL_FILTERING'])!;
     
     const divergenceShader = compileShader(gl.FRAGMENT_SHADER, `
         precision mediump float;
@@ -358,7 +368,7 @@ function SplashCursor({
             float div = 0.5 * (R - L + T - B);
             gl_FragColor = vec4(div, 0.0, 0.0, 1.0);
         }
-    `);
+    `)!;
 
     const curlShader = compileShader(gl.FRAGMENT_SHADER, `
         precision mediump float;
@@ -377,7 +387,7 @@ function SplashCursor({
             float vorticity = R - L - T + B;
             gl_FragColor = vec4(0.5 * vorticity, 0.0, 0.0, 1.0);
         }
-    `);
+    `)!;
 
     const vorticityShader = compileShader(gl.FRAGMENT_SHADER, `
         precision highp float;
@@ -404,7 +414,7 @@ function SplashCursor({
             vec2 vel = texture2D(uVelocity, vUv).xy;
             gl_FragColor = vec4(vel + force * dt, 0.0, 1.0);
         }
-    `);
+    `)!;
 
     const pressureShader = compileShader(gl.FRAGMENT_SHADER, `
         precision mediump float;
@@ -426,7 +436,7 @@ function SplashCursor({
             float pressure = (L + R + B + T - divergence) * 0.25;
             gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);
         }
-    `);
+    `)!;
 
     const gradientSubtractShader = compileShader(gl.FRAGMENT_SHADER, `
         precision mediump float;
@@ -447,7 +457,7 @@ function SplashCursor({
             velocity.xy -= vec2(R - L, T - B);
             gl_FragColor = vec4(velocity, 0.0, 1.0);
         }
-    `);
+    `)!;
 
     const blit = (() => {
         const quad_buffer = gl.createBuffer();
@@ -510,10 +520,18 @@ function SplashCursor({
         curl = createFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
         pressure = createDoubleFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
     }
+
+    type FBO = {
+      texture: WebGLTexture,
+      fbo: WebGLFramebuffer | null,
+      width: number,
+      height: number,
+      attach: (id: number) => number
+    };
     
-    function createFBO(w: number, h: number, internalFormat: number, format: number, type: number, param: number) {
+    function createFBO(w: number, h: number, internalFormat: number, format: number, type: number, param: number) : FBO {
         gl.activeTexture(gl.TEXTURE0);
-        let texture = gl.createTexture();
+        let texture = gl.createTexture()!;
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, param);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, param);
@@ -557,7 +575,7 @@ function SplashCursor({
         }
     }
     
-    function resizeFBO(target: any, w: number, h: number, internalFormat: number, format: number, type: number, param: number) {
+    function resizeFBO(target: FBO, w: number, h: number, internalFormat: number, format: number, type: number, param: number) {
       let newFBO = createFBO(w, h, internalFormat, format, type, param);
       const copyProgram = new Program(baseVertexShader, compileShader(gl.FRAGMENT_SHADER, `
           precision mediump float;
@@ -567,7 +585,7 @@ function SplashCursor({
           void main () {
               gl_FragColor = texture2D(uTexture, vUv);
           }
-      `));
+      `)!);
       copyProgram.bind();
       gl.uniform1i(copyProgram.uniforms.uTexture, target.attach(0));
       blit(newFBO);
