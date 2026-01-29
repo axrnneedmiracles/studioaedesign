@@ -48,15 +48,6 @@ export default function PortfolioPage() {
     }
   };
 
-  const listVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
-  };
-
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -79,16 +70,16 @@ export default function PortfolioPage() {
         ref={scrollContainerRef}
         className="w-full max-w-lg h-[60vh] overflow-y-auto scrollbar-hide p-4"
       >
-        <motion.ul
+        <ul
           className="list-none m-0 p-0"
-          variants={listVariants}
-          initial="hidden"
-          animate="visible"
         >
           {portfolioItems.map((item) => (
             <motion.li
               key={item.slug}
               variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
               className="mb-4"
             >
               <div
@@ -113,7 +104,7 @@ export default function PortfolioPage() {
               </div>
             </motion.li>
           ))}
-        </motion.ul>
+        </ul>
       </div>
     </div>
   );
