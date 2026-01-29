@@ -32,19 +32,13 @@ export default function PortfolioPage() {
               imageSrc={item.image}
               altText={item.name}
               captionText={item.name}
+              title={item.name}
               containerHeight="250px"
               containerWidth="250px"
               imageHeight="250px"
               imageWidth="250px"
               scaleOnHover={1.05}
               displayOverlayContent={true}
-              overlayContent={
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center rounded-[15px] pointer-events-none">
-                    <h3 className="text-white text-2xl font-bold text-center p-4">
-                        {item.name}
-                    </h3>
-                </div>
-              }
             />
           </a>
         ))}
