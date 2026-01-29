@@ -27,11 +27,11 @@ export default function PortfolioPage() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center p-8">
-      <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight mb-12 text-center">
+    <div className="w-screen h-screen flex flex-col items-center p-8 pt-24">
+      <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-center shrink-0 mb-12">
         Our Portfolio
       </h1>
-      <div className="h-[60vh] w-full max-w-lg">
+      <div className="w-full max-w-lg flex-grow min-h-0">
         <AnimatedList
           items={portfolioItems}
           onItemSelect={handleItemSelect}
