@@ -1,87 +1,96 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import ChromaGrid from '@/components/chroma-grid';
 
 const portfolioItems = [
-    { name: 'BLENDER', slug: 'blender', image: '/blender_logo.png' },
-    { name: 'DAVINCI', slug: 'davinci', image: '/davinci_logo.png' },
-    { name: 'AFTER EFFECTS', slug: 'after-effects', image: '/aftereffects_logo.png' },
-    { name: 'FL STUDIO', slug: 'fl-studio', image: '/flstudio_logo.png' },
-    { name: 'UNITY', slug: 'unity', image: '/unity_logo.png' },
-    { name: 'HOUDINI', slug: 'houdini', image: '/h_logo.png' },
-    { name: 'WEB DEV', slug: 'web-dev', image: '/webdev_logo.png' },
-    { name: 'CANVA', slug: 'canva', image: '/canva_logo.png' },
+  {
+    image: '/blender_logo.png',
+    title: 'Blender',
+    subtitle: '3D Creations',
+    handle: '@blender',
+    borderColor: '#F57D2C',
+    gradient: 'linear-gradient(145deg, #F57D2C, #000)',
+    url: '/portfolio/blender'
+  },
+  {
+    image: '/davinci_logo.png',
+    title: 'DaVinci Resolve',
+    subtitle: 'Video Editing',
+    handle: '@davinci',
+    borderColor: '#3B82F6',
+    gradient: 'linear-gradient(145deg, #3B82F6, #000)',
+    url: '/portfolio/davinci'
+  },
+    {
+    image: '/aftereffects_logo.png',
+    title: 'After Effects',
+    subtitle: 'Motion Graphics',
+    handle: '@aftereffects',
+    borderColor: '#D946EF',
+    gradient: 'linear-gradient(145deg, #D946EF, #000)',
+    url: '/portfolio/after-effects'
+  },
+    {
+    image: '/flstudio_logo.png',
+    title: 'FL Studio',
+    subtitle: 'Music Production',
+    handle: '@flstudio',
+    borderColor: '#F59E0B',
+    gradient: 'linear-gradient(145deg, #F59E0B, #000)',
+    url: '/portfolio/fl-studio'
+  },
+    {
+    image: '/unity_logo.png',
+    title: 'Unity',
+    subtitle: 'Game Development',
+    handle: '@unity',
+    borderColor: '#4B5563',
+    gradient: 'linear-gradient(145deg, #4B5563, #000)',
+    url: '/portfolio/unity'
+  },
+  {
+    image: '/h_logo.png',
+    title: 'Houdini',
+    subtitle: 'VFX & Simulation',
+    handle: '@houdini',
+    borderColor: '#EF4444',
+    gradient: 'linear-gradient(145deg, #EF4444, #000)',
+    url: '/portfolio/houdini'
+  },
+    {
+    image: '/webdev_logo.png',
+    title: 'Web Dev',
+    subtitle: 'Full-stack Solutions',
+    handle: '@webdev',
+    borderColor: '#06B6D4',
+    gradient: 'linear-gradient(145deg, #06B6D4, #000)',
+    url: '/portfolio/web-dev'
+  },
+    {
+    image: '/canva_logo.png',
+    title: 'Canva',
+    subtitle: 'Graphic Design',
+    handle: '@canva',
+    borderColor: '#8B5CF6',
+    gradient: 'linear-gradient(145deg, #8B5CF6, #000)',
+    url: '/portfolio/canva'
+  },
 ];
 
-type PortfolioItem = {
-  name: string;
-  slug: string;
-  image: string;
-}
-
 export default function PortfolioPage() {
-  const handleItemClick = (item: PortfolioItem) => {
-    if (item && item.slug) {
-      window.open(`/portfolio/${item.slug}`, '_blank');
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center p-8 overflow-hidden">
-      <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-center shrink-0 mb-12">
+    <div className="w-full h-screen flex flex-col items-center justify-center p-0 overflow-hidden">
+      <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-center shrink-0 mb-12 mt-24">
         Our Portfolio
       </h1>
-      
-      <div 
-        className="w-full max-w-lg h-[60vh] overflow-y-auto scrollbar-hide p-4"
-      >
-        <ul
-          className="list-none m-0 p-0"
-        >
-          {portfolioItems.map((item) => (
-            <motion.li
-              key={item.slug}
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              className="mb-4"
-            >
-              <div
-                onClick={() => handleItemClick(item)}
-                className="p-4 bg-black/20 backdrop-blur-sm rounded-lg flex items-center gap-6 cursor-pointer transition-colors duration-200 hover:bg-white/10"
-              >
-                <div className="relative w-16 h-16 group shrink-0">
-                  <img
-                    src={item.image}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute top-1 left-1 h-full w-full object-contain"
-                    style={{ filter: 'brightness(0) saturate(100%) invert(18%) sepia(85%) saturate(5833%) hue-rotate(240deg) brightness(102%) contrast(105%)' }}
-                  />
-                  <img
-                    src={item.image}
-                    alt={`${item.name} logo`}
-                    className="absolute top-0 left-0 h-full w-full object-contain transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold text-white">{item.name}</h3>
-              </div>
-            </motion.li>
-          ))}
-        </ul>
+      <div className="w-full flex-grow relative">
+        <ChromaGrid 
+          items={portfolioItems}
+          radius={400}
+          damping={0.45}
+          fadeOut={0.6}
+          ease="power3.out"
+        />
       </div>
     </div>
   );
