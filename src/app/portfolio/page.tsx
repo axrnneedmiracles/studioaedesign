@@ -21,14 +21,8 @@ export default function PortfolioPage() {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {portfolioItems.map((item) => (
-          <a
-            key={item.slug}
-            href={`/portfolio/${item.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block"
-          >
             <TiltedCard
+              key={item.slug}
               imageSrc={item.image}
               altText={item.name}
               captionText={item.name}
@@ -38,13 +32,13 @@ export default function PortfolioPage() {
               imageWidth="250px"
               scaleOnHover={1.05}
               displayOverlayContent={true}
+              onClick={() => window.open(`/portfolio/${item.slug}`, '_blank')}
               overlayContent={
                 <h3 className="p-4 text-center text-2xl font-bold text-white">
                   {item.name}
                 </h3>
               }
             />
-          </a>
         ))}
       </div>
     </div>
