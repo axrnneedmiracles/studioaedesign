@@ -34,9 +34,15 @@ const AnimatedItem = ({
   );
 };
 
+type PortfolioItem = {
+    name: string;
+    slug: string;
+    image: string;
+}
+
 type AnimatedListProps = {
-  items?: string[];
-  onItemSelect?: (item: string, index: number) => void;
+  items?: PortfolioItem[];
+  onItemSelect?: (item: PortfolioItem, index: number) => void;
   enableArrowNavigation?: boolean;
   className?: string;
   itemClassName?: string;
@@ -44,11 +50,7 @@ type AnimatedListProps = {
 };
 
 const AnimatedList = ({
-  items = [
-    'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6',
-    'Item 7', 'Item 8', 'Item 9', 'Item 10', 'Item 11', 'Item 12',
-    'Item 13', 'Item 14', 'Item 15',
-  ],
+  items = [],
   onItemSelect,
   enableArrowNavigation = true,
   className = '',
@@ -63,7 +65,7 @@ const AnimatedList = ({
   }, []);
 
   const handleItemClick = useCallback(
-    (item: string, index: number) => {
+    (item: PortfolioItem, index: number) => {
       setSelectedIndex(index);
       if (onItemSelect) {
         onItemSelect(item, index);
@@ -103,18 +105,32 @@ const AnimatedList = ({
       >
         {items.map((item, index) => (
           <AnimatedItem
-            key={index}
+            key={item.slug}
             delay={0.1}
             index={index}
             onMouseEnter={() => handleItemMouseEnter(index)}
             onClick={() => handleItemClick(item, index)}
           >
             <div
-              className={`p-4 bg-black/20 backdrop-blur-sm rounded-lg ${
+              className={`p-4 bg-black/20 backdrop-blur-sm rounded-lg flex items-center gap-6 ${
                 selectedIndex === index ? 'bg-white/10' : ''
               } ${itemClassName}`}
             >
-              <p className="text-white m-0">{item}</p>
+              <div className="relative w-16 h-16 group shrink-0">
+                <img
+                  src={item.image}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute top-1 left-1 h-full w-full object-contain"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(30%) sepia(94%) saturate(2811%) hue-rotate(228deg) brightness(101%) contrast(102%)' }}
+                />
+                <img
+                  src={item.image}
+                  alt={`${item.name} logo`}
+                  className="absolute top-0 left-0 h-full w-full object-contain transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-white">{item.name}</h3>
             </div>
           </AnimatedItem>
         ))}
