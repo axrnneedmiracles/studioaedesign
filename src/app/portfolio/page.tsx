@@ -79,7 +79,7 @@ const portfolioItems = [
 
 export default function PortfolioPage() {
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-start p-0">
+    <div className="w-full min-h-screen flex flex-col items-center justify-start">
       <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-center shrink-0 mb-12 mt-24">
         Our Portfolio
       </h1>
