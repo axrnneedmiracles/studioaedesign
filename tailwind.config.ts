@@ -89,12 +89,12 @@ export default {
           },
         },
         'star-movement-bottom': {
-          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
-          '100%': { transform: 'translate(-100%, 0%)', opacity: '0' },
+          '0%': { transform: 'translate(0%, 0%)' },
+          '100%': { transform: 'translate(-100%, 0%)' },
         },
         'star-movement-top': {
-          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
-          '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
+          '0%': { transform: 'translate(0%, 0%)' },
+          '100%': { transform: 'translate(100%, 0%)' },
         },
       },
       animation: {

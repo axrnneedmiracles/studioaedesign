@@ -23,6 +23,31 @@ interface ChromaGridProps {
   ease?: string;
 }
 
+const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, damping = 0.45![CDATA['use client';
+
+import { useRef, useEffect, FC } from 'react';
+import { gsap } from 'gsap';
+
+interface ChromaGridItem {
+  image: string;
+  title: string;
+  subtitle: string;
+  handle?: string;
+  borderColor?: string;
+  gradient?: string;
+  url?: string;
+  location?: string;
+}
+
+interface ChromaGridProps {
+  items?: ChromaGridItem[];
+  className?: string;
+  radius?: number;
+  damping?: number;
+  fadeOut?: number;
+  ease?: string;
+}
+
 const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, damping = 0.45, fadeOut = 0.6, ease = 'power3.out' }) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
@@ -167,16 +192,16 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
           } as React.CSSProperties}
         >
           <div
-            className="absolute w-[300%] h-[50%] opacity-0 group-hover:opacity-70 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
+            className="absolute w-[300%] h-[50%] opacity-0 group-hover:opacity-100 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
             style={{
-              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 10%)`,
+              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 15%)`,
               animationDuration: '5s'
             }}
           ></div>
           <div
-            className="absolute w-[300%] h-[50%] opacity-0 group-hover:opacity-70 top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0"
+            className="absolute w-[300%] h-[50%] opacity-0 group-hover:opacity-100 top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0"
             style={{
-              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 10%)`,
+              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 15%)`,
               animationDuration: '5s'
             }}
           ></div>
