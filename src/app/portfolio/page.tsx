@@ -83,10 +83,10 @@ export default function PortfolioPage() {
       <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-center shrink-0 mb-12 mt-24">
         Our Portfolio
       </h1>
-      <div className="w-full flex-grow relative px-4 pb-24">
+      <div className="w-full relative px-4 pb-24 h-[600px]">
         <ChromaGrid 
           items={portfolioItems}
-          radius={400}
+          radius={300}
           damping={0.45}
           fadeOut={0.6}
           ease="power3.out"

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, FC } from 'react';
+import { useRef, useEffect, FC, PointerEvent, MouseEvent } from 'react';
 import { gsap } from 'gsap';
 
 interface ChromaGridItem {
@@ -96,10 +96,8 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
     setY.current = gsap.quickSetter(el, '--y', 'px');
     const { width, height } = el.getBoundingClientRect();
     pos.current = { x: width / 2, y: height / 2 };
-    if (setX.current && setY.current) {
-      setX.current(pos.current.x);
-      setY.current(pos.current.y);
-    }
+    setX.current(pos.current.x);
+    setY.current(pos.current.y);
   }, []);
 
   const moveTo = (x: number, y: number) => {
@@ -116,7 +114,7 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
     });
   };
 
-  const handleMove = (e: React.PointerEvent<HTMLDivElement>) => {
+  const handleMove = (e: PointerEvent<HTMLDivElement>) => {
     if(!rootRef.current) return;
     const r = rootRef.current.getBoundingClientRect();
     moveTo(e.clientX - r.left, e.clientY - r.top);
@@ -135,7 +133,7 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
     if (url) window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleCardMove = (e: React.MouseEvent<HTMLElement>) => {
+  const handleCardMove = (e: MouseEvent<HTMLElement>) => {
     const c = e.currentTarget;
     const rect = c.getBoundingClientRect();
     c.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
@@ -147,7 +145,7 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
       ref={rootRef}
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
-      className={`relative w-full flex flex-wrap justify-center items-start gap-6 p-8 ${className}`}
+      className={`relative w-full h-full flex flex-wrap justify-center items-start gap-3 ${className}`}
       style={{
         '--r': `${radius}px`,
         '--x': '50%',
@@ -159,48 +157,29 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
           key={i}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
-          className="group relative w-[300px] rounded-[20px] border-2 border-transparent transition-all duration-300 cursor-pointer hover:scale-105 hover:z-50 overflow-hidden"
+          className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer"
           style={{
             '--card-border': c.borderColor || 'transparent',
+            background: c.gradient,
             '--spotlight-color': 'rgba(255,255,255,0.3)'
           } as React.CSSProperties}
         >
           <div
-            className="absolute w-[300%] h-[50%] opacity-0 group-hover:opacity-70 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
+            className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
             style={{
-              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 10%)`,
-              animationDuration: '5s'
+              background:
+                'radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)'
             }}
-          ></div>
-          <div
-            className="absolute w-[300%] h-[50%] opacity-0 group-hover:opacity-70 top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0"
-            style={{
-              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 10%)`,
-              animationDuration: '5s'
-            }}
-          ></div>
-
-          <div 
-            className="relative z-10 flex flex-col flex-1 h-full w-full rounded-[20px]"
-            style={{ background: c.gradient }}
-          >
-            <div
-              className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
-              style={{
-                background:
-                  'radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)'
-              }}
-            />
-            <div className="relative z-10 flex-1 p-[10px] box-border">
-              <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
-            </div>
-            <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
-              <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
-              {c.handle && <span className="text-[0.95rem] opacity-80 text-right">{c.handle}</span>}
-              <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>
-              {c.location && <span className="text-[0.85rem] opacity-85 text-right">{c.location}</span>}
-            </footer>
+          />
+          <div className="relative z-10 flex-1 p-[10px] box-border">
+            <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
           </div>
+          <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
+            <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
+            {c.handle && <span className="text-[0.95rem] opacity-80 text-right">{c.handle}</span>}
+            <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>
+            {c.location && <span className="text-[0.85rem] opacity-85 text-right">{c.location}</span>}
+          </footer>
         </article>
       ))}
       <div
@@ -234,5 +213,3 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
 };
 
 export default ChromaGrid;
-
-    
