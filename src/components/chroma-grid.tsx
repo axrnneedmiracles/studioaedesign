@@ -114,7 +114,7 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '' }) => {
             <ElectricBorder
               color={c.borderColor || '#fff'}
               borderRadius={20}
-              className="w-[300px]"
+              className="w-[300px] h-[300px]"
             >
               <article
                   className="group relative z-10 flex flex-col h-full rounded-[20px]"
@@ -131,7 +131,7 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '' }) => {
                   }}
                 />
                 <div className="relative z-10 flex-1 p-[10px] box-border">
-                  <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
+                  <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-contain rounded-[10px]" />
                 </div>
                 <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
                   <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
