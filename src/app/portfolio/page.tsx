@@ -56,13 +56,13 @@ export default function PortfolioPage() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 [perspective:1000px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {portfolioItems.map((item) => (
           <Link key={item.url} href={item.url} className="block group">
-            <div className="relative w-full aspect-[2/3] rounded-2xl bg-card/10 backdrop-blur-sm border border-white/10 p-6 flex flex-col items-center justify-center text-center transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:scale(1.05)_rotateY(20deg)]">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(29,78,216,0.4)_0%,transparent_80%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="[transform:translateZ(40px)]">
-                <div className="relative w-24 h-24 mb-4 transition-transform duration-500 group-hover:scale-110">
+            <div className="relative w-full aspect-square rounded-2xl bg-card/10 backdrop-blur-sm border border-white/10 p-6 flex flex-col items-center justify-center text-center transition-transform duration-300 ease-in-out group-hover:scale-105 group-hover:[transform:translateZ(20px)]">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(29,78,216,0.4)_0%,transparent_80%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative z-10">
+                <div className="relative w-24 h-24 mb-4">
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -70,7 +70,7 @@ export default function PortfolioPage() {
                     className="object-contain"
                   />
                 </div>
-                <h3 className="relative text-xl font-semibold text-white">
+                <h3 className="text-xl font-semibold text-white">
                   {item.title}
                 </h3>
               </div>
