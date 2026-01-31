@@ -78,7 +78,7 @@ export default function PortfolioPage() {
         </p>
       </header>
 
-      <div className="relative min-h-[600px] w-full">
+      <div className="relative w-full">
         <ChromaGrid items={portfolioItems} />
       </div>
     </div>
