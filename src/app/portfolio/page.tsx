@@ -1,96 +1,80 @@
-'use client';
-
-import ChromaGrid from '@/components/chroma-grid';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const portfolioItems = [
   {
     image: '/blender_logo.png',
     title: 'Blender',
-    subtitle: '3D Creations',
-    handle: '@blender',
-    borderColor: '#F57D2C',
-    gradient: 'linear-gradient(145deg, #F57D2C, #000)',
-    url: '/portfolio/blender'
+    url: '/portfolio/blender',
   },
   {
     image: '/davinci_logo.png',
     title: 'DaVinci Resolve',
-    subtitle: 'Video Editing',
-    handle: '@davinci',
-    borderColor: '#3B82F6',
-    gradient: 'linear-gradient(145deg, #3B82F6, #000)',
-    url: '/portfolio/davinci'
+    url: '/portfolio/davinci',
   },
-    {
+  {
     image: '/aftereffects_logo.png',
     title: 'After Effects',
-    subtitle: 'Motion Graphics',
-    handle: '@aftereffects',
-    borderColor: '#D946EF',
-    gradient: 'linear-gradient(145deg, #D946EF, #000)',
-    url: '/portfolio/after-effects'
+    url: '/portfolio/after-effects',
   },
-    {
+  {
     image: '/flstudio_logo.png',
     title: 'FL Studio',
-    subtitle: 'Music Production',
-    handle: '@flstudio',
-    borderColor: '#F59E0B',
-    gradient: 'linear-gradient(145deg, #F59E0B, #000)',
-    url: '/portfolio/fl-studio'
+    url: '/portfolio/fl-studio',
   },
-    {
+  {
     image: '/unity_logo.png',
     title: 'Unity',
-    subtitle: 'Game Development',
-    handle: '@unity',
-    borderColor: '#4B5563',
-    gradient: 'linear-gradient(145deg, #4B5563, #000)',
-    url: '/portfolio/unity'
+    url: '/portfolio/unity',
   },
   {
     image: '/h_logo.png',
     title: 'Houdini',
-    subtitle: 'VFX & Simulation',
-    handle: '@houdini',
-    borderColor: '#EF4444',
-    gradient: 'linear-gradient(145deg, #EF4444, #000)',
-    url: '/portfolio/houdini'
+    url: '/portfolio/houdini',
   },
-    {
+  {
     image: '/webdev_logo.png',
     title: 'Web Dev',
-    subtitle: 'Full-stack Solutions',
-    handle: '@webdev',
-    borderColor: '#06B6D4',
-    gradient: 'linear-gradient(145deg, #06B6D4, #000)',
-    url: '/portfolio/web-dev'
+    url: '/portfolio/web-dev',
   },
-    {
+  {
     image: '/canva_logo.png',
     title: 'Canva',
-    subtitle: 'Graphic Design',
-    handle: '@canva',
-    borderColor: '#8B5CF6',
-    gradient: 'linear-gradient(145deg, #8B5CF6, #000)',
-    url: '/portfolio/canva'
+    url: '/portfolio/canva',
   },
 ];
 
 export default function PortfolioPage() {
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-start">
-      <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-center shrink-0 mb-12 mt-24">
-        Our Portfolio
-      </h1>
-      <div className="w-full relative px-4 pb-24 h-[600px]">
-        <ChromaGrid 
-          items={portfolioItems}
-          radius={300}
-          damping={0.45}
-          fadeOut={0.6}
-          ease="power3.out"
-        />
+    <div className="container mx-auto px-4 py-16 md:py-24">
+      <header className="text-center max-w-3xl mx-auto mb-16">
+        <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight mb-4">
+          Our Portfolio
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground">
+          A selection of our work. Click to see more.
+        </p>
+      </header>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {portfolioItems.map((item) => (
+          <Link key={item.url} href={item.url} className="block group">
+            <div className="relative aspect-square rounded-2xl bg-card/10 backdrop-blur-sm border border-white/10 p-6 flex flex-col items-center justify-center text-center transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(29,78,216,0.3)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative w-24 h-24 mb-4">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+              <h3 className="relative text-xl font-semibold text-white">
+                {item.title}
+              </h3>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
