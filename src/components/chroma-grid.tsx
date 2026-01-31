@@ -165,13 +165,28 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
           key={i}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
-          className="group relative flex flex-col w-[300px] rounded-[20px] border-2 border-transparent transition-colors duration-300 cursor-pointer"
+          className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer"
           style={{
             '--card-border': c.borderColor || 'transparent',
             background: c.gradient,
             '--spotlight-color': 'rgba(255,255,255,0.3)'
           } as React.CSSProperties}
         >
+          <div
+            className="absolute w-[300%] h-[50%] opacity-70 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
+            style={{
+              background: `radial-gradient(circle, ${c.borderColor || 'magenta'}, transparent 10%)`,
+              animationDuration: '6s'
+            }}
+          ></div>
+          <div
+            className="absolute w-[300%] h-[50%] opacity-70 top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0"
+            style={{
+              background: `radial-gradient(circle, ${c.borderColor || 'magenta'}, transparent 10%)`,
+              animationDuration: '6s'
+            }}
+          ></div>
+
           <div
             className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
             style={{
