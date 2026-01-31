@@ -234,3 +234,5 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
 };
 
 export default ChromaGrid;
+
+    
