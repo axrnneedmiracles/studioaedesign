@@ -159,7 +159,7 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
           key={i}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
-          className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 border-transparent transition-all duration-300 cursor-pointer hover:scale-105 hover:z-50"
+          className="group relative flex flex-col w-[300px] rounded-[20px] border-2 border-transparent transition-all duration-300 cursor-pointer hover:scale-105 hover:z-50"
           style={{
             '--card-border': c.borderColor || 'transparent',
             background: c.gradient,
@@ -169,14 +169,14 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
           <div
             className="absolute w-[300%] h-[50%] opacity-0 group-hover:opacity-100 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
             style={{
-              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 15%)`,
+              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 25%)`,
               animationDuration: '5s'
             }}
           ></div>
           <div
             className="absolute w-[300%] h-[50%] opacity-0 group-hover:opacity-100 top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0"
             style={{
-              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 15%)`,
+              background: `radial-gradient(circle, ${c.borderColor || 'white'}, transparent 25%)`,
               animationDuration: '5s'
             }}
           ></div>
