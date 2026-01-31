@@ -159,10 +159,9 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
           key={i}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
-          className="group relative flex flex-col w-[300px] rounded-[20px] border-2 border-transparent transition-all duration-300 cursor-pointer hover:scale-105 hover:z-50"
+          className="group relative w-[300px] rounded-[20px] border-2 border-transparent transition-all duration-300 cursor-pointer hover:scale-105 hover:z-50 overflow-hidden"
           style={{
             '--card-border': c.borderColor || 'transparent',
-            background: c.gradient,
             '--spotlight-color': 'rgba(255,255,255,0.3)'
           } as React.CSSProperties}
         >
@@ -180,22 +179,28 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
               animationDuration: '5s'
             }}
           ></div>
-          <div
-            className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
-            style={{
-              background:
-                'radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)'
-            }}
-          />
-          <div className="relative z-10 flex-1 p-[10px] box-border">
-            <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
+
+          <div 
+            className="relative z-10 flex flex-col flex-1 h-full w-full rounded-[20px]"
+            style={{ background: c.gradient }}
+          >
+            <div
+              className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
+              style={{
+                background:
+                  'radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)'
+              }}
+            />
+            <div className="relative z-10 flex-1 p-[10px] box-border">
+              <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
+            </div>
+            <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
+              <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
+              {c.handle && <span className="text-[0.95rem] opacity-80 text-right">{c.handle}</span>}
+              <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>
+              {c.location && <span className="text-[0.85rem] opacity-85 text-right">{c.location}</span>}
+            </footer>
           </div>
-          <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
-            <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
-            {c.handle && <span className="text-[0.95rem] opacity-80 text-right">{c.handle}</span>}
-            <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>
-            {c.location && <span className="text-[0.85rem] opacity-85 text-right">{c.location}</span>}
-          </footer>
         </article>
       ))}
       <div
