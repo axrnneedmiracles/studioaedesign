@@ -3,6 +3,7 @@
 import { useRef, useEffect, FC, PointerEvent, MouseEvent } from 'react';
 import { gsap } from 'gsap';
 import { useRouter } from 'next/navigation';
+import ClickSpark from './click-spark';
 
 interface ChromaGridItem {
   image: string;
@@ -161,55 +162,56 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '', radius = 300, 
       } as React.CSSProperties}
     >
       {data.map((c, i) => (
-        <div
-            key={i}
-            onMouseMove={handleCardMove}
-            onClick={() => handleCardClick(c.url)}
-            className="group relative w-[300px] rounded-[20px] cursor-pointer overflow-hidden"
-            style={{
-                '--mouse-x': '0px',
-                '--mouse-y': '0px',
-            } as React.CSSProperties}
-        >
-            <div
-                className="absolute w-[300%] h-[50%] opacity-70 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
-                style={{
-                    background: `radial-gradient(circle, ${c.borderColor}, transparent 10%)`,
-                    animationDuration: '5s'
-                }}
-            ></div>
-            <div
-                className="absolute w-[300%] h-[50%] opacity-70 top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0"
-                style={{
-                    background: `radial-gradient(circle, ${c.borderColor}, transparent 10%)`,
-                    animationDuration: '5s'
-                }}
-            ></div>
-            <article
-                className="relative z-10 flex flex-col h-full rounded-[20px]"
-                style={{
-                    background: c.gradient,
-                    '--spotlight-color': 'rgba(255,255,255,0.3)',
-                }}
-              >
+        <ClickSpark key={i} sparkColor={c.borderColor || '#fff'}>
+          <div
+              onMouseMove={handleCardMove}
+              onClick={() => handleCardClick(c.url)}
+              className="group relative w-[300px] rounded-[20px] cursor-pointer overflow-hidden"
+              style={{
+                  '--mouse-x': '0px',
+                  '--mouse-y': '0px',
+              } as React.CSSProperties}
+          >
               <div
-                className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
-                style={{
-                  background:
-                    'radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)'
-                }}
-              />
-              <div className="relative z-10 flex-1 p-[10px] box-border">
-                <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
-              </div>
-              <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
-                <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
-                {c.handle && <span className="text-[0.95rem] opacity-80 text-right">{c.handle}</span>}
-                {c.subtitle && <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>}
-                {c.location && <span className="text-[0.85rem] opacity-85 text-right">{c.location}</span>}
-              </footer>
-            </article>
-        </div>
+                  className="absolute w-[300%] h-[50%] opacity-70 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
+                  style={{
+                      background: `radial-gradient(circle, ${c.borderColor}, transparent 10%)`,
+                      animationDuration: '5s'
+                  }}
+              ></div>
+              <div
+                  className="absolute w-[300%] h-[50%] opacity-70 top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0"
+                  style={{
+                      background: `radial-gradient(circle, ${c.borderColor}, transparent 10%)`,
+                      animationDuration: '5s'
+                  }}
+              ></div>
+              <article
+                  className="relative z-10 flex flex-col h-full rounded-[20px]"
+                  style={{
+                      background: c.gradient,
+                      '--spotlight-color': 'rgba(255,255,255,0.3)',
+                  }}
+                >
+                <div
+                  className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
+                  style={{
+                    background:
+                      'radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)'
+                  }}
+                />
+                <div className="relative z-10 flex-1 p-[10px] box-border">
+                  <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
+                </div>
+                <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
+                  <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
+                  {c.handle && <span className="text-[0.95rem] opacity-80 text-right">{c.handle}</span>}
+                  {c.subtitle && <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>}
+                  {c.location && <span className="text-[0.85rem] opacity-85 text-right">{c.location}</span>}
+                </footer>
+              </article>
+          </div>
+        </ClickSpark>
       ))}
       <div
         className="absolute inset-0 pointer-events-none z-30"
