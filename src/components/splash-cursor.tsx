@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Basic types for WebGL contexts and pointers
 type GLContext = WebGL2RenderingContext | WebGLRenderingContext;
@@ -36,8 +36,15 @@ function SplashCursor({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number>();
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -977,10 +984,15 @@ function SplashCursor({
     };
     
   }, [
+    isClient,
     SIM_RESOLUTION, DYE_RESOLUTION, DENSITY_DISSIPATION, VELOCITY_DISSIPATION,
     PRESSURE, PRESSURE_ITERATIONS, CURL, SPLAT_RADIUS, SPLAT_FORCE,
     SHADING, COLORFUL, COLOR_UPDATE_SPEED, PAUSED, BACK_COLOR, TRANSPARENT
   ]);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="fixed top-0 left-0 z-50 pointer-events-none w-screen h-screen">
