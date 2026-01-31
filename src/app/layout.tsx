@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import LightPillar from '@/components/light-pillar';
 import StaggeredMenu from '@/components/staggered-menu';
-import SplashCursor from '@/components/splash-cursor';
+import LayoutClient from '@/components/layout-client';
 
 export const metadata: Metadata = {
   title: 'Studio Noir',
@@ -40,21 +40,22 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
-        <SplashCursor />
-        <StaggeredMenu
-            isFixed={true}
-            items={menuItems}
-            socialItems={socialItems}
-          />
-        <div className="fixed inset-0 -z-30">
-          <LightPillar />
-        </div>
-        <div className="fixed inset-0 bg-black/70 -z-20" />
+        <LayoutClient>
+          <StaggeredMenu
+              isFixed={true}
+              items={menuItems}
+              socialItems={socialItems}
+            />
+          <div className="fixed inset-0 -z-30">
+            <LightPillar />
+          </div>
+          <div className="fixed inset-0 bg-black/70 -z-20" />
 
-        <div className="relative z-0 flex flex-col min-h-screen">
-          <main className="flex-grow">{children}</main>
-        </div>
-        <Toaster />
+          <div className="relative z-0 flex flex-col min-h-screen">
+            <main className="flex-grow">{children}</main>
+          </div>
+          <Toaster />
+        </LayoutClient>
       </body>
     </html>
   );
