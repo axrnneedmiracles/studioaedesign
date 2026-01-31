@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import Link from 'next/link';
 import { Home } from 'lucide-react';
@@ -52,6 +52,11 @@ export const StaggeredMenu = ({
   onMenuOpen,
   onMenuClose,
 }: StaggeredMenuProps) => {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
 
@@ -381,6 +386,10 @@ export const StaggeredMenu = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [closeOnClickAway, open, closeMenu]);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className={`sm-scope z-50 ${isFixed ? 'fixed top-0 left-0 w-full h-full' : 'relative w-full h-full'}`}>
