@@ -85,6 +85,7 @@ export const StaggeredMenu = ({
   const itemEntranceTweenRef = useRef<gsap.core.Timeline | null>(null);
 
   useLayoutEffect(() => {
+    if (!isClient) return;
     const ctx = gsap.context(() => {
       const panel = panelRef.current;
       const preContainer = preLayersRef.current;
@@ -116,7 +117,7 @@ export const StaggeredMenu = ({
       if (homeIconRef.current) gsap.set(homeIconRef.current, { color: menuButtonColor });
     });
     return () => ctx.revert();
-  }, [menuButtonColor, position]);
+  }, [isClient, menuButtonColor, position]);
 
   const buildOpenTimeline = useCallback(() => {
     const panel = panelRef.current;
@@ -368,7 +369,7 @@ export const StaggeredMenu = ({
   }, [playClose, animateIcon, animateColor, animateText, onMenuClose]);
 
   React.useEffect(() => {
-    if (!closeOnClickAway || !open) return;
+    if (!isClient || !closeOnClickAway || !open) return;
 
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -385,7 +386,7 @@ export const StaggeredMenu = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [closeOnClickAway, open, closeMenu]);
+  }, [isClient, closeOnClickAway, open, closeMenu]);
 
   if (!isClient) {
     return null;
