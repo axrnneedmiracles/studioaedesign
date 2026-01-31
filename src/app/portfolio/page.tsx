@@ -1,56 +1,47 @@
-import ChromaGrid from '@/components/chroma-grid';
+import DomeGallery from '@/components/dome-gallery';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Portfolio | Studio Noir',
+    description: 'Explore our work in a 3D interactive gallery.',
+};
 
 const portfolioItems = [
   {
     image: '/blender_logo.png',
     title: 'Blender',
-    url: '/portfolio/blender',
   },
   {
     image: '/davinci_logo.png',
     title: 'DaVinci Resolve',
-    url: '/portfolio/davinci',
   },
   {
     image: '/aftereffects_logo.png',
     title: 'After Effects',
-    url: '/portfolio/after-effects',
   },
   {
     image: '/flstudio_logo.png',
     title: 'FL Studio',
-    url: '/portfolio/fl-studio',
   },
   {
     image: '/unity_logo.png',
     title: 'Unity',
-    url: '/portfolio/unity',
   },
   {
     image: '/h_logo.png',
     title: 'Houdini',
-    url: '/portfolio/houdini',
   },
   {
     image: '/webdev_logo.png',
     title: 'Web Dev',
-    url: '/portfolio/web-dev',
   },
   {
     image: '/canva_logo.png',
     title: 'Canva',
-    url: '/portfolio/canva',
   },
 ];
 
-const chromaGridItems = portfolioItems.map(item => ({
-    image: item.image,
-    title: item.title,
-    subtitle: 'View Project',
-    url: item.url,
-    borderColor: '#4F46E5', 
-    gradient: 'linear-gradient(145deg, #000, #111)',
-}));
+const galleryImages = portfolioItems.map(item => ({ src: item.image, alt: item.title }));
 
 export default function PortfolioPage() {
   return (
@@ -60,12 +51,12 @@ export default function PortfolioPage() {
           Our Portfolio
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground">
-          A selection of our work. Interact with the grid below.
+          A selection of our work. Drag to explore the dome, click to enlarge.
         </p>
       </header>
 
-      <div className="relative h-[900px]">
-        <ChromaGrid items={chromaGridItems} />
+      <div className="relative h-[900px] w-full">
+        <DomeGallery images={galleryImages} />
       </div>
     </div>
   );
