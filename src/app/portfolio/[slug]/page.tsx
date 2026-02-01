@@ -62,11 +62,13 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
         </p>
       </header>
       
-      <div className="w-full max-w-4xl mx-auto flex justify-center md:justify-start">
+      <div className="w-full max-w-6xl mx-auto">
         {params.slug === 'blender' ? (
-          <AnimatedProjectList />
+          <div className="flex justify-center md:justify-start">
+              <AnimatedProjectList />
+          </div>
         ) : (
-          <div className="w-full max-w-2xl text-center p-8 bg-card/50 border rounded-lg">
+          <div className="w-full max-w-2xl mx-auto text-center p-8 bg-card/50 border rounded-lg">
             <p className="text-muted-foreground">Sample project content for {title}.</p>
           </div>
         )}
