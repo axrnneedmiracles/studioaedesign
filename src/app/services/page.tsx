@@ -3,6 +3,7 @@ import { services } from '@/lib/data';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import BlurText from '@/components/blur-text';
 
 export const metadata: Metadata = {
   title: 'Services | Studio Noir',
@@ -32,7 +33,11 @@ export default function ServicesPage() {
                     </div>
                     <div className="text-center sm:text-left">
                       <CardTitle className="mb-2 text-xl">{service.title}</CardTitle>
-                      <CardDescription>{service.description}</CardDescription>
+                      <BlurText
+                        text={service.description}
+                        animateBy="words"
+                        className="text-sm text-muted-foreground"
+                      />
                     </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mt-4 justify-center sm:justify-end">
