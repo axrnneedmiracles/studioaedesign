@@ -15,6 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ImageScroller } from '@/components/image-scroller';
 
 const portfolioItems = [
   'blender',
@@ -74,8 +75,17 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
       case 'fl-studio':
         return <MusicVisualizer />;
       case 'unity':
+        const unityImages = [
+          { src: 'https://picsum.photos/seed/unity-scroll-1/400/300', alt: 'Unity project screenshot 1', hint: 'game environment' },
+          { src: 'https://picsum.photos/seed/unity-scroll-2/400/300', alt: 'Unity project screenshot 2', hint: 'character model' },
+          { src: 'https://picsum.photos/seed/unity-scroll-3/400/300', alt: 'Unity project screenshot 3', hint: 'gameplay action' },
+          { src: 'https://picsum.photos/seed/unity-scroll-4/400/300', alt: 'Unity project screenshot 4', hint: '3d assets' },
+          { src: 'https://picsum.photos/seed/unity-scroll-5/400/300', alt: 'Unity project screenshot 5', hint: 'level design' },
+          { src: 'https://picsum.photos/seed/unity-scroll-6/400/300', alt: 'Unity project screenshot 6', hint: 'vfx graph' },
+        ];
         return (
-            <div className="w-full max-w-md mx-auto space-y-4">
+          <div className="flex flex-col items-center space-y-16">
+            <div className="w-full max-w-md mx-auto">
                 <Dialog>
                     <DialogTrigger asChild>
                         <div className="bg-card/50 border border-border p-6 rounded-lg text-left text-xl font-semibold text-foreground shadow-md cursor-pointer hover:bg-card/70 transition-colors">
@@ -100,6 +110,8 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
                     </DialogContent>
                 </Dialog>
             </div>
+            <ImageScroller images={unityImages} speed="slow" />
+          </div>
         );
       case 'web-dev':
         return (
