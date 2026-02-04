@@ -13,16 +13,25 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Skeleton } from './ui/skeleton';
 
+const serviceItems = [
+    { id: "Blender", label: "Blender" },
+    { id: "DaVinci", label: "DaVinci" },
+    { id: "After Effects", label: "After Effects" },
+];
+
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
   email: z.string().email('Please enter a valid email address.'),
-  message: z.string().min(10, 'Message must be at least 10 characters.'),
+  idType: z.string({ required_error: 'Please select a platform.' }),
+  userId: z.string().optional(),
+  services: z.array(z.string()).optional(),
 });
 
 export function ContactForm() {
@@ -38,20 +47,32 @@ export function ContactForm() {
     defaultValues: {
       name: '',
       email: '',
-      message: '',
+      userId: '',
+      services: [],
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Simulate server action
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(values);
+    try {
+        await fetch("https://script.google.com/macros/s/AKfycbxrHq2Zwy1FOPmZIAFyD5Lut8Hi78ybiWOQTk9K_1lRWESiAJZM2ZhWkD68YHsler5ZnA/exec", {
+            method: 'POST',
+            body: JSON.stringify(values),
+        });
+        
+        toast({
+          title: 'Message Sent!',
+          description: "Thanks for reaching out. We'll get back to you soon.",
+        });
+        form.reset();
 
-    toast({
-      title: 'Message Sent!',
-      description: "Thanks for reaching out. We'll get back to you soon.",
-    });
-    form.reset();
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        toast({
+            title: 'An Error Occurred',
+            description: 'There was an error sending your message. Please try again.',
+            variant: 'destructive',
+        });
+    }
   }
 
   if (!isClient) {
@@ -61,13 +82,36 @@ export function ContactForm() {
             <Skeleton className="h-4 w-1/4" />
             <Skeleton className="h-10 w-full" />
         </div>
-          <div className="space-y-2">
+        <div className="space-y-2">
             <Skeleton className="h-4 w-1/4" />
             <Skeleton className="h-10 w-full" />
         </div>
-          <div className="space-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+                <Skeleton className="h-4 w-1/4" />
+                <Skeleton className="h-10 w-full" />
+            </div>
+            <div className="space-y-2">
+                <Skeleton className="h-4 w-1/4" />
+                <Skeleton className="h-10 w-full" />
+            </div>
+        </div>
+        <div className="space-y-2">
             <Skeleton className="h-4 w-1/4" />
-            <Skeleton className="h-24 w-full" />
+            <div className="space-y-2 pt-2">
+                <div className="flex items-center space-x-3">
+                    <Skeleton className="h-4 w-4 rounded" />
+                    <Skeleton className="h-4 w-20" />
+                </div>
+                <div className="flex items-center space-x-3">
+                    <Skeleton className="h-4 w-4 rounded" />
+                    <Skeleton className="h-4 w-28" />
+                </div>
+                <div className="flex items-center space-x-3">
+                    <Skeleton className="h-4 w-4 rounded" />
+                    <Skeleton className="h-4 w-24" />
+                </div>
+            </div>
         </div>
         <Skeleton className="h-10 w-full" />
       </div>
@@ -103,23 +147,94 @@ export function ContactForm() {
             </FormItem>
           )}
         />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+                control={form.control}
+                name="idType"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Platform</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a platform" />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            <SelectItem value="Instagram">Instagram</SelectItem>
+                            <SelectItem value="Discord">Discord</SelectItem>
+                            <SelectItem value="GitHub">GitHub</SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="userId"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>User ID</FormLabel>
+                    <FormControl>
+                    <Input placeholder="Your ID on the platform" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+        </div>
+
         <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Tell us about your project or inquiry..."
-                  className="min-h-[120px]"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+            control={form.control}
+            name="services"
+            render={() => (
+                <FormItem>
+                <div className="mb-4">
+                    <FormLabel>Services Interested In</FormLabel>
+                </div>
+                <div className="space-y-2">
+                    {serviceItems.map((item) => (
+                    <FormField
+                        key={item.id}
+                        control={form.control}
+                        name="services"
+                        render={({ field }) => {
+                        return (
+                            <FormItem
+                            key={item.id}
+                            className="flex flex-row items-center space-x-3 space-y-0"
+                            >
+                            <FormControl>
+                                <Checkbox
+                                checked={field.value?.includes(item.id)}
+                                onCheckedChange={(checked) => {
+                                    return checked
+                                    ? field.onChange([...(field.value || []), item.id])
+                                    : field.onChange(
+                                        field.value?.filter(
+                                            (value) => value !== item.id
+                                        )
+                                        );
+                                }}
+                                />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                                {item.label}
+                            </FormLabel>
+                            </FormItem>
+                        );
+                        }}
+                    />
+                    ))}
+                </div>
+                <FormMessage />
+                </FormItem>
+            )}
         />
+        
         <Button
           type="submit"
           disabled={form.formState.isSubmitting}
