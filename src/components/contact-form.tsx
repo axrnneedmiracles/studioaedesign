@@ -65,7 +65,7 @@ export function ContactForm() {
     }
     try {
         const { company, ...submissionValues } = values;
-        await fetch("https://script.google.com/macros/s/AKfycbxrHq2Zwy1FOPmZIAFyD5Lut8Hi78ybiWOQTk9K_1lRWESiAJZM2ZhWkD68YHsler5ZnA/exec", {
+        await fetch("https://script.google.com/macros/s/AKfycbwyC-W9eTjoZphTqeXLe7LQpSWZBFRnbD692vK3No4Rx8MJs94wsFzVrduuQeUz01t0dw/exec", {
             method: 'POST',
             body: JSON.stringify(submissionValues),
         });
