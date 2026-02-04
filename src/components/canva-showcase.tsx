@@ -7,10 +7,10 @@ import { Button } from './ui/button';
 import { motion } from 'framer-motion';
 
 const floatingImages = [
-  { src: '/canva/pic1.jpg', alt: 'Canva design 1', className: 'top-10 -left-28 w-48 h-32 rotate-[-15deg]' },
-  { src: '/canva/pic2.jpg', alt: 'Canva design 2', className: 'bottom-10 -right-28 w-56 h-40 rotate-[10deg]' },
-  { src: '/canva/pic4.jpg', alt: 'Canva design 4', className: 'top-1/2 -right-40 w-40 h-56 rotate-[-5deg]' },
-  { src: '/canva/pic5.jpg', alt: 'Canva design 5', className: 'bottom-5 -left-40 w-56 h-40 rotate-[8deg]' },
+  { src: '/canva/pic1.jpg', alt: 'Canva design 1', className: 'top-10 -left-40 w-48 h-32 rotate-[-15deg]' },
+  { src: '/canva/pic2.jpg', alt: 'Canva design 2', className: 'bottom-20 -right-44 w-56 h-40 rotate-[10deg]' },
+  { src: '/canva/pic4.jpg', alt: 'Canva design 4', className: 'top-20 -right-44 w-40 h-56 rotate-[-5deg]' },
+  { src: '/canva/pic5.jpg', alt: 'Canva design 5', className: 'bottom-10 -left-48 w-56 h-40 rotate-[8deg]' },
 ];
 
 export function CanvaShowcase() {
@@ -47,7 +47,7 @@ export function CanvaShowcase() {
       ))}
 
       {/* TV screen */}
-      <div className="relative w-[60vw] max-w-4xl aspect-video bg-black border-[1.5vw] md:border-8 border-gray-800 rounded-2xl shadow-2xl p-1 md:p-2 flex items-center justify-center z-10">
+      <div className="relative w-[50vw] max-w-3xl aspect-video bg-black border-[1.5vw] md:border-8 border-gray-800 rounded-2xl shadow-2xl p-1 md:p-2 flex items-center justify-center z-10">
         <div className="w-full h-full relative overflow-hidden rounded-md">
           <video
             ref={videoRef}
