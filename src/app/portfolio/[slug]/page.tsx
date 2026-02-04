@@ -18,6 +18,7 @@ import {
 import { ImageScroller } from '@/components/image-scroller';
 import GlitchText from '@/components/glitch-text';
 import BlurText from '@/components/blur-text';
+import { CanvaShowcase } from '@/components/canva-showcase';
 
 const portfolioItems = [
   'blender',
@@ -75,6 +76,8 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
             <Model3D />
           </div>
         );
+      case 'canva':
+        return <CanvaShowcase />;
       case 'fl-studio':
         return <MusicVisualizer />;
       case 'unity':
@@ -169,6 +172,8 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
     switch (params.slug) {
         case 'blender':
             return 'Here are some of our Blender projects.';
+        case 'canva':
+            return 'Explore our creative designs made with Canva.';
         case 'fl-studio':
             return 'A selection of our musical works.';
         case 'unity':
