@@ -127,11 +127,8 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '' }) => {
               <div className="relative z-0 flex-grow p-[10px] box-border">
                 <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-contain rounded-[10px]" />
               </div>
-              <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 bg-black/70 rounded-b-[20px]">
-                <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
-                {c.handle && <span className="text-[0.95rem] opacity-80 text-right">{c.handle}</span>}
-                {c.subtitle && <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>}
-                {c.location && <span className="text-[0.85rem] opacity-85 text-right">{c.location}</span>}
+              <footer className="relative z-10 p-2 text-white font-sans flex justify-center items-center bg-black/70 rounded-b-[20px]">
+                <h3 className="m-0 text-base font-semibold">{c.title}</h3>
               </footer>
             </article>
           </div>
