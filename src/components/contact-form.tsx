@@ -24,6 +24,10 @@ const serviceItems = [
     { id: "Blender", label: "Blender" },
     { id: "DaVinci", label: "DaVinci" },
     { id: "After Effects", label: "After Effects" },
+    { id: "Canva", label: "Canva" },
+    { id: "FL Studio", label: "FL Studio" },
+    { id: "Web Dev", label: "Web Dev" },
+    { id: "Unity", label: "Unity" },
 ];
 
 const formSchema = z.object({
@@ -164,7 +168,7 @@ export function ContactForm() {
                         <SelectContent>
                             <SelectItem value="Instagram">Instagram</SelectItem>
                             <SelectItem value="Discord">Discord</SelectItem>
-                            <SelectItem value="GitHub">GitHub</SelectItem>
+                            <SelectItem value="Twitter">Twitter</SelectItem>
                             <SelectItem value="Other">Other</SelectItem>
                         </SelectContent>
                     </Select>
