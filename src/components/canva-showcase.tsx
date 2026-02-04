@@ -7,10 +7,10 @@ import { Button } from './ui/button';
 import { motion } from 'framer-motion';
 
 const floatingImages = [
-  { src: '/canva/pic1.jpg', alt: 'Canva design 1', className: 'absolute -top-8 -left-16 w-48 h-32 rotate-[-15deg]' },
-  { src: '/canva/pic4.jpg', alt: 'Canva design 4', className: 'absolute -top-12 -right-16 w-40 h-56 rotate-[-5deg]' },
-  { src: '/canva/pic5.jpg', alt: 'Canva design 5', className: 'absolute -bottom-12 -left-20 w-56 h-40 rotate-[8deg]' },
-  { src: '/canva/pic2.jpg', alt: 'Canva design 2', className: 'absolute -bottom-8 -right-20 w-56 h-40 rotate-[10deg]' },
+  { src: '/canva/pic1.jpg', alt: 'Canva design 1', className: 'absolute -top-10 -left-24 w-48 h-32 rotate-[-15deg]' },
+  { src: '/canva/pic4.jpg', alt: 'Canva design 4', className: 'absolute -top-14 -right-24 w-40 h-56 rotate-[-5deg]' },
+  { src: '/canva/pic5.jpg', alt: 'Canva design 5', className: 'absolute -bottom-14 -left-28 w-56 h-40 rotate-[8deg]' },
+  { src: '/canva/pic2.jpg', alt: 'Canva design 2', className: 'absolute -bottom-10 -right-28 w-56 h-40 rotate-[10deg]' },
 ];
 
 export function CanvaShowcase() {
@@ -27,7 +27,7 @@ export function CanvaShowcase() {
   return (
     <div className="relative flex justify-center items-center w-full min-h-[60vh] my-16">
       {/* TV screen */}
-      <div className="relative w-[40vw] max-w-2xl aspect-video">
+      <div className="relative w-[35vw] max-w-xl aspect-video">
         
         {/* Floating images */}
         {floatingImages.map((img, index) => (
