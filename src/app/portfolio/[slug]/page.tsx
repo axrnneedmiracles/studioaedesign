@@ -118,26 +118,17 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
       case 'web-dev':
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            <div className="max-w-md space-y-4">
-                <h2 className="text-2xl font-bold font-headline">Dynamic Web Solutions</h2>
-                <p className="text-muted-foreground">
-                    We build modern, responsive, and performant websites that not only look great but also deliver an exceptional user experience. Our expertise spans across the latest front-end and back-end technologies to bring your vision to life.
-                </p>
-                <p className="text-muted-foreground">
-                    From single-page applications to complex e-commerce platforms, our code is clean, scalable, and optimized for search engines.
-                </p>
-                <div className="flex flex-col space-y-4 pt-4">
-                    <Button asChild variant="outline">
-                        <a href="https://axrn.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            SENTINEL SCAN
-                        </a>
-                    </Button>
-                    <Button asChild variant="outline">
-                        <a href="https://park-conscious.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            PARK CONSCIOUS
-                        </a>
-                    </Button>
-                </div>
+            <div className="flex flex-col space-y-4">
+                <Button asChild variant="outline">
+                    <a href="https://axrn.netlify.app/" target="_blank" rel="noopener noreferrer">
+                        SENTINEL SCAN
+                    </a>
+                </Button>
+                <Button asChild variant="outline">
+                    <a href="https://park-conscious.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        PARK CONSCIOUS
+                    </a>
+                </Button>
             </div>
             <CodeTypingEffect />
           </div>
