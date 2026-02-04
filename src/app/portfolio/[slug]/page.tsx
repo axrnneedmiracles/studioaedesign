@@ -117,7 +117,7 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
         );
       case 'web-dev':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="flex flex-col space-y-4">
                 <Button asChild variant="outline">
                     <a href="https://axrn.netlify.app/" target="_blank" rel="noopener noreferrer">
