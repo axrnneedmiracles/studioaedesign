@@ -6,6 +6,11 @@ import { ArrowLeft } from 'lucide-react';
 import { AnimatedProjectList } from '@/components/animated-project-list';
 import Model3D from '@/components/Model3D';
 import { MusicVisualizer } from '@/components/music-visualizer';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const portfolioItems = [
   'blender',
@@ -64,6 +69,31 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
         );
       case 'fl-studio':
         return <MusicVisualizer />;
+      case 'unity':
+        return (
+            <div className="w-full max-w-md mx-auto space-y-4">
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <div className="bg-card/50 border border-border p-6 rounded-lg text-left text-xl font-semibold text-foreground shadow-md cursor-pointer hover:bg-card/70 transition-colors">
+                            LIE OF SURVIVAL
+                        </div>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl h-auto p-0 border-0 overflow-hidden">
+                        <div className="aspect-video">
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                src="https://www.youtube.com/embed/LLsBid3WA4Q"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                    </DialogContent>
+                </Dialog>
+            </div>
+        );
       default:
         return (
           <div className="w-full max-w-2xl mx-auto text-center p-8 bg-card/50 border rounded-lg">
@@ -84,6 +114,8 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
             ? 'Here are some of our Blender projects.'
             : params.slug === 'fl-studio'
             ? 'A selection of our musical works.'
+            : params.slug === 'unity'
+            ? 'A sample of our game development work.'
             : 'A list of sample projects.'}
         </p>
       </header>
