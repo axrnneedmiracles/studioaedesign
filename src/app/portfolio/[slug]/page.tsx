@@ -80,8 +80,6 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
           { src: '/unityimg/unity2.jpg', alt: 'Unity project screenshot 2', hint: 'character model' },
           { src: '/unityimg/unity3.jpg', alt: 'Unity project screenshot 3', hint: 'gameplay action' },
           { src: '/unityimg/unity4.jpg', alt: 'Unity project screenshot 4', hint: '3d assets' },
-          { src: '/unityimg/unity5.jpg', alt: 'Unity project screenshot 5', hint: 'level design' },
-          { src: '/unityimg/unity6.jpg', alt: 'Unity project screenshot 6', hint: 'vfx graph' },
         ];
         return (
           <div className="flex flex-col items-center space-y-16">
