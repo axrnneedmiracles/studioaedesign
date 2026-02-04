@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Mail } from 'lucide-react';
 import { AnimatedProjectList } from '@/components/animated-project-list';
 import Model3D from '@/components/Model3D';
 import { MusicVisualizer } from '@/components/music-visualizer';
@@ -202,11 +202,17 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
         {renderContent()}
       </div>
 
-      <div className="mt-12 flex justify-center">
+      <div className="mt-12 flex justify-center gap-4">
         <Button asChild variant="outline">
           <Link href="/portfolio">
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <ArrowLeft />
             Back to Portfolio
+          </Link>
+        </Button>
+        <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
+          <Link href="/contact">
+            <Mail />
+            Contact Us
           </Link>
         </Button>
       </div>
