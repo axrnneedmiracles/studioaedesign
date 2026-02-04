@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { AnimatedProjectList } from '@/components/animated-project-list';
 import Model3D from '@/components/Model3D';
+import { MusicVisualizer } from '@/components/music-visualizer';
 
 const portfolioItems = [
   'blender',
@@ -51,6 +52,26 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+  
+  const renderContent = () => {
+    switch (params.slug) {
+      case 'blender':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <AnimatedProjectList />
+            <Model3D />
+          </div>
+        );
+      case 'fl-studio':
+        return <MusicVisualizer />;
+      default:
+        return (
+          <div className="w-full max-w-2xl mx-auto text-center p-8 bg-card/50 border rounded-lg">
+            <p className="text-muted-foreground">Sample project content for {title}.</p>
+          </div>
+        );
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-16 md:py-24 min-h-screen">
@@ -59,21 +80,16 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
           {title} Projects
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground">
-          {params.slug === 'blender' ? 'Here are some of our Blender projects.' : 'A list of sample projects.'}
+          {params.slug === 'blender'
+            ? 'Here are some of our Blender projects.'
+            : params.slug === 'fl-studio'
+            ? 'A selection of our musical works.'
+            : 'A list of sample projects.'}
         </p>
       </header>
       
       <div className="w-full max-w-6xl mx-auto">
-        {params.slug === 'blender' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <AnimatedProjectList />
-            <Model3D />
-          </div>
-        ) : (
-          <div className="w-full max-w-2xl mx-auto text-center p-8 bg-card/50 border rounded-lg">
-            <p className="text-muted-foreground">Sample project content for {title}.</p>
-          </div>
-        )}
+        {renderContent()}
       </div>
 
       <div className="mt-12 flex justify-center">
