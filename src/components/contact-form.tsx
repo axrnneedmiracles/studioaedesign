@@ -75,34 +75,42 @@ export function ContactForm() {
       return;
     }
     
-    const formData = new FormData();
-    
-    formData.append('name', values.name);
-    formData.append('email', values.email);
-    formData.append('userId', values.userId);
-
-    if (values.idType === 'Other' && values.otherId) {
-        formData.append('idType', `Other (${values.otherId})`);
-    } else {
-        formData.append('idType', values.idType);
-    }
-    
-    if (values.services && values.services.length > 0) {
-        formData.append('services', values.services.join(', '));
-    }
+    const payload = {
+      name: values.name,
+      idType: values.idType === 'Other' && values.otherId
+        ? `Other (${values.otherId})`
+        : values.idType,
+      userId: values.userId,
+      email: values.email,
+      services: values.services || [],
+    };
 
     try {
-        await fetch("https://script.google.com/macros/s/AKfycbww6h0IGQAV0y_7GMjGqEN7o2AbcQtxIgx-fa7UlYx1kGrbioY3EwfzMj_oW-lA9gQIqQ/exec", {
+        const res = await fetch("https://script.google.com/macros/s/AKfycbxR_6TU-bFVnengiOFYY-GQVOyxgRxuAEcW2PCivPmT-zqo1r-7DAHEpsPTXHKFX3jG0g/exec", {
             method: 'POST',
-            body: formData,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
         });
-        
-        toast({
-          title: 'Message Sent!',
-          description: "Thanks for reaching out. We'll get back to you soon.",
-        });
-        form.reset();
 
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const result = await res.json();
+        
+        if (result.status === "success") {
+          toast({
+            title: 'Message Sent!',
+            description: "Thanks for reaching out. We'll get back to you soon.",
+          });
+          form.reset();
+        } else {
+           toast({
+            title: 'Submission Error',
+            description: result.message || 'There was a problem with your submission.',
+            variant: 'destructive',
+          });
+        }
     } catch (error) {
         console.error('Error submitting form:', error);
         toast({
