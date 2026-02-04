@@ -7,6 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import { AnimatedProjectList } from '@/components/animated-project-list';
 import Model3D from '@/components/Model3D';
 import { MusicVisualizer } from '@/components/music-visualizer';
+import { CodeTypingEffect } from '@/components/code-typing-effect';
 import {
   Dialog,
   DialogContent,
@@ -100,12 +101,42 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
                 </Dialog>
             </div>
         );
+      case 'web-dev':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+            <div className="max-w-md space-y-4">
+                <h2 className="text-2xl font-bold font-headline">Dynamic Web Solutions</h2>
+                <p className="text-muted-foreground">
+                    We build modern, responsive, and performant websites that not only look great but also deliver an exceptional user experience. Our expertise spans across the latest front-end and back-end technologies to bring your vision to life.
+                </p>
+                <p className="text-muted-foreground">
+                    From single-page applications to complex e-commerce platforms, our code is clean, scalable, and optimized for search engines.
+                </p>
+            </div>
+            <CodeTypingEffect />
+          </div>
+        );
       default:
         return (
           <div className="w-full max-w-2xl mx-auto text-center p-8 bg-card/50 border rounded-lg">
             <p className="text-muted-foreground">Sample project content for {title}.</p>
           </div>
         );
+    }
+  };
+
+  const getPageDescription = () => {
+    switch (params.slug) {
+        case 'blender':
+            return 'Here are some of our Blender projects.';
+        case 'fl-studio':
+            return 'A selection of our musical works.';
+        case 'unity':
+            return 'A sample of our game development work.';
+        case 'web-dev':
+            return 'A glimpse into our world of code.';
+        default:
+            return 'A list of sample projects.';
     }
   };
 
@@ -116,13 +147,7 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
           {title} Projects
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground">
-          {params.slug === 'blender'
-            ? 'Here are some of our Blender projects.'
-            : params.slug === 'fl-studio'
-            ? 'A selection of our musical works.'
-            : params.slug === 'unity'
-            ? 'A sample of our game development work.'
-            : 'A list of sample projects.'}
+          {getPageDescription()}
         </p>
       </header>
       
