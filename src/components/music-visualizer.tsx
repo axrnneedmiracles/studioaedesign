@@ -102,13 +102,13 @@ export function MusicVisualizer() {
         const g = 100;
         const b = 150 + (barHeight / canvas.height) * 105;
 
-        ctx.fillStyle = `rgb(${r},${g},${b})`;
+        ctx.fillStyle = `rgba(${r},${g},${b}, 0.8)`;
         ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
         x += barWidth + 1;
       }
     } else {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
   }, [isPlaying]);
