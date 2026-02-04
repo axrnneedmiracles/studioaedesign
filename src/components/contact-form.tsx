@@ -63,11 +63,25 @@ export function ContactForm() {
       // Bot detected, fail silently.
       return;
     }
+    
+    const formData = new FormData();
+    const { company, ...submissionValues } = values;
+
+    // Append form values to formData. This is needed to bypass CORS issues with Google Apps Script.
+    Object.entries(submissionValues).forEach(([key, value]) => {
+      if (value) {
+        if (Array.isArray(value)) {
+          formData.append(key, value.join(', '));
+        } else {
+          formData.append(key, value as string);
+        }
+      }
+    });
+
     try {
-        const { company, ...submissionValues } = values;
         await fetch("https://script.google.com/macros/s/AKfycbwyC-W9eTjoZphTqeXLe7LQpSWZBFRnbD692vK3No4Rx8MJs94wsFzVrduuQeUz01t0dw/exec", {
             method: 'POST',
-            body: JSON.stringify(submissionValues),
+            body: formData,
         });
         
         toast({
