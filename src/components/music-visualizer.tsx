@@ -146,9 +146,7 @@ export function MusicVisualizer() {
   return (
     <div className="w-full flex flex-col items-center">
         <p className="text-muted-foreground mb-8 text-center">
-            Click on a project to play music and see the visualizer.
-            <br />
-            Note: You'll need to add your own audio files to the `/public/music/` directory.
+            CLICK TO LISTEN THE SONG
         </p>
         <div 
           className="flex flex-wrap justify-center gap-4 mb-8"
