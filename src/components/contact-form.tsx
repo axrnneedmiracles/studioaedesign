@@ -36,6 +36,7 @@ const formSchema = z.object({
   idType: z.string({ required_error: 'Please select a platform.' }),
   userId: z.string().optional(),
   services: z.array(z.string()).optional(),
+  company: z.string().optional(),
 });
 
 export function ContactForm() {
@@ -53,14 +54,20 @@ export function ContactForm() {
       email: '',
       userId: '',
       services: [],
+      company: '',
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (values.company) {
+      // Bot detected, fail silently.
+      return;
+    }
     try {
+        const { company, ...submissionValues } = values;
         await fetch("https://script.google.com/macros/s/AKfycbxrHq2Zwy1FOPmZIAFyD5Lut8Hi78ybiWOQTk9K_1lRWESiAJZM2ZhWkD68YHsler5ZnA/exec", {
             method: 'POST',
-            body: JSON.stringify(values),
+            body: JSON.stringify(submissionValues),
         });
         
         toast({
@@ -239,6 +246,19 @@ export function ContactForm() {
             )}
         />
         
+        <FormField
+          control={form.control}
+          name="company"
+          render={({ field }) => (
+            <FormItem className="hidden">
+              <FormLabel>Company</FormLabel>
+              <FormControl>
+                <Input {...field} tabIndex={-1} autoComplete="off" />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
         <Button
           type="submit"
           disabled={form.formState.isSubmitting}
