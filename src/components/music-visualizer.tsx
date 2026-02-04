@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Play, Pause } from 'lucide-react';
 
 const projects = [
-  { id: 1, title: 'Project Alpha', src: '/audio/track1.mp3' },
-  { id: 2, title: 'Project Beta', src: '/audio/track2.mp3' },
-  { id: 3, title: 'Project Gamma', src: '/audio/track3.mp3' },
-  { id: 4, title: 'Project Delta', src: '/audio/track4.mp3' },
-  { id: 5, title: 'Project Epsilon', src: '/audio/track5.mp3' },
+  { id: 1, title: 'Project Alpha', src: '/music/track1.mp3' },
+  { id: 2, title: 'Project Beta', src: '/music/track2.mp3' },
+  { id: 3, title: 'Project Gamma', src: '/music/track3.mp3' },
+  { id: 4, title: 'Project Delta', src: '/music/track4.mp3' },
+  { id: 5, title: 'Project Epsilon', src: '/music/track5.mp3' },
 ];
 
 export function MusicVisualizer() {
@@ -154,7 +154,7 @@ export function MusicVisualizer() {
         <p className="text-muted-foreground mb-8 text-center">
             Click on a project to play music and see the visualizer.
             <br />
-            Note: You'll need to add your own audio files to the `/public/audio/` directory.
+            Note: You'll need to add your own audio files to the `/public/music/` directory.
         </p>
         <div 
           className="flex flex-wrap justify-center gap-4 mb-8"
