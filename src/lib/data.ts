@@ -1,5 +1,5 @@
 import type { TeamMember, Service, Project } from './types';
-import { Camera, Video, Brush, Code, Film } from 'lucide-react';
+import { Film, Cuboid, Code, Image, Video, Gamepad2 } from 'lucide-react';
 
 export const teamMembers: TeamMember[] = [
   {
@@ -35,27 +35,39 @@ export const teamMembers: TeamMember[] = [
 export const services: Service[] = [
   {
     id: '1',
-    title: 'Photography',
-    description: 'High-quality commercial, portrait, and event photography.',
-    icon: Camera,
+    title: 'Video Editing',
+    description: 'Professional video editing for a polished final product.',
+    icon: Film,
   },
   {
     id: '2',
+    title: '3D Arts',
+    description: 'Creating stunning 3D models, animations, and visualizations.',
+    icon: Cuboid,
+  },
+  {
+    id: '3',
+    title: 'Web Dev',
+    description: 'Building beautiful, responsive websites that perform.',
+    icon: Code,
+  },
+  {
+    id: '4',
+    title: 'Photo Editing',
+    description: 'High-quality photo retouching and enhancement services.',
+    icon: Image,
+  },
+  {
+    id: '5',
     title: 'Videography',
     description: 'Cinematic video production for brands and events.',
     icon: Video,
   },
   {
-    id: '3',
-    title: 'Branding',
-    description: 'Crafting unique visual identities that tell a story.',
-    icon: Brush,
-  },
-  {
-    id: '4',
-    title: 'Web Design',
-    description: 'Building beautiful, responsive websites that perform.',
-    icon: Code,
+    id: '6',
+    title: 'Game Dev',
+    description: 'Developing immersive and engaging game experiences.',
+    icon: Gamepad2,
   },
 ];
 
