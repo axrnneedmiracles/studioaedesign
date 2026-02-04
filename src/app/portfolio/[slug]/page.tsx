@@ -94,8 +94,8 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
                         </div>
                     </DialogTrigger>
                     <DialogContent className="max-w-4xl h-auto p-0 border-0 overflow-hidden">
-                        <DialogHeader className="sr-only">
-                          <DialogTitle>Lie of Survival Video</DialogTitle>
+                        <DialogHeader>
+                          <DialogTitle className="sr-only">Lie of Survival Video</DialogTitle>
                         </DialogHeader>
                         <div className="aspect-video">
                             <iframe
@@ -126,6 +126,18 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
                 <p className="text-muted-foreground">
                     From single-page applications to complex e-commerce platforms, our code is clean, scalable, and optimized for search engines.
                 </p>
+                <div className="flex flex-col space-y-4 pt-4">
+                    <Button asChild variant="outline">
+                        <a href="https://axrn.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            SENTINEL SCAN
+                        </a>
+                    </Button>
+                    <Button asChild variant="outline">
+                        <a href="https://park-conscious.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            PARK CONSCIOUS
+                        </a>
+                    </Button>
+                </div>
             </div>
             <CodeTypingEffect />
           </div>
