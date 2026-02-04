@@ -111,7 +111,7 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '' }) => {
             className="cursor-pointer w-[300px] h-[300px]"
           >
             <article
-                className="group relative z-10 flex flex-col h-full rounded-[20px]"
+                className="group relative z-10 h-full rounded-[20px]"
                 style={{
                     background: c.gradient,
                     '--spotlight-color': 'rgba(255,255,255,0.3)',
@@ -124,10 +124,10 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '' }) => {
                     'radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)'
                 }}
               />
-              <div className="relative z-10 flex-1 p-[10px] box-border">
+              <div className="relative z-0 h-full p-[10px] box-border">
                 <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-contain rounded-[10px]" />
               </div>
-              <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
+              <footer className="absolute bottom-0 left-0 right-0 z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 bg-gradient-to-t from-black/60 to-transparent rounded-b-[20px]">
                 <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
                 {c.handle && <span className="text-[0.95rem] opacity-80 text-right">{c.handle}</span>}
                 {c.subtitle && <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>}
