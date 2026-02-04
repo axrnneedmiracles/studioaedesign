@@ -38,36 +38,42 @@ export const services: Service[] = [
     title: 'Video Editing',
     description: 'Professional video editing for a polished final product.',
     icon: Film,
+    slug: 'after-effects',
   },
   {
     id: '2',
     title: '3D Arts',
     description: 'Creating stunning 3D models, animations, and visualizations.',
     icon: Cuboid,
+    slug: 'blender',
   },
   {
     id: '3',
     title: 'Web Dev',
     description: 'Building beautiful, responsive websites that perform.',
     icon: Code,
+    slug: 'web-dev',
   },
   {
     id: '4',
     title: 'Photo Editing',
     description: 'High-quality photo retouching and enhancement services.',
     icon: Image,
+    slug: 'canva',
   },
   {
     id: '5',
     title: 'Videography',
     description: 'Cinematic video production for brands and events.',
     icon: Video,
+    slug: 'davinci',
   },
   {
     id: '6',
     title: 'Game Dev',
     description: 'Developing immersive and engaging game experiences.',
     icon: Gamepad2,
+    slug: 'unity',
   },
 ];
 

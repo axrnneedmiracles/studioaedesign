@@ -1,6 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 import { services } from '@/lib/data';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Services | Studio Noir',
@@ -21,15 +22,17 @@ export default function ServicesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {services.map((service) => (
-          <Card key={service.id} className="flex flex-col sm:flex-row items-center p-6">
-            <div className="p-4 bg-accent/10 rounded-full mb-4 sm:mb-0 sm:mr-6">
-              <service.icon className="h-10 w-10 text-accent" />
-            </div>
-            <div className="text-center sm:text-left">
-              <CardTitle className="mb-2 text-xl">{service.title}</CardTitle>
-              <CardDescription>{service.description}</CardDescription>
-            </div>
-          </Card>
+          <Link key={service.id} href={`/portfolio/${service.slug}`} className="block h-full">
+            <Card className="flex flex-col sm:flex-row items-center p-6 h-full hover:bg-card/70 transition-colors">
+              <div className="p-4 bg-accent/10 rounded-full mb-4 sm:mb-0 sm:mr-6">
+                <service.icon className="h-10 w-10 text-accent" />
+              </div>
+              <div className="text-center sm:text-left">
+                <CardTitle className="mb-2 text-xl">{service.title}</CardTitle>
+                <CardDescription>{service.description}</CardDescription>
+              </div>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>

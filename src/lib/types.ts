@@ -13,6 +13,7 @@ export type Service = {
   title: string;
   description: string;
   icon: ComponentType<{ className?: string }>;
+  slug: string;
 };
 
 export type Project = {
