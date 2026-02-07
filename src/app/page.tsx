@@ -17,26 +17,28 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-grow flex flex-col items-center pt-2">
-      <TextType
-        as="h1"
-        text={['WELCOME TO BITRATE STUDIO']}
-        typingSpeed={75}
-        pauseDuration={1500}
-        showCursor
-        cursorCharacter="█"
-        loop={false}
-        className="text-4xl md:text-6xl font-headline text-center font-bold"
-      />
-      <div className="inline-flex gap-4 my-2">
-        <Button asChild size="lg">
-          <Link href="/portfolio">PORTFOLIO</Link>
-        </Button>
-        <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-          <Link href="/contact">CONTACT US</Link>
-        </Button>
+    <div className="flex flex-col h-full">
+      <div className="text-center pt-20">
+        <TextType
+          as="h1"
+          text={['WELCOME TO BITRATE STUDIO']}
+          typingSpeed={75}
+          pauseDuration={1500}
+          showCursor
+          cursorCharacter="█"
+          loop={false}
+          className="text-4xl md:text-6xl font-headline font-bold"
+        />
+        <div className="inline-flex gap-4 my-8">
+          <Button asChild size="lg">
+            <Link href="/portfolio">PORTFOLIO</Link>
+          </Button>
+          <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+            <Link href="/contact">CONTACT US</Link>
+          </Button>
+        </div>
       </div>
-      <div className="w-full h-[400px] relative">
+      <div className="w-full flex-grow relative">
         <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={0.5} autoScrollSpeed={0.05} />
       </div>
     </div>
