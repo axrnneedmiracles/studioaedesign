@@ -27,7 +27,7 @@ export default function Home() {
         loop={false}
         className="text-4xl md:text-6xl font-headline text-center font-bold"
       />
-      <div className="flex gap-4">
+      <div className="flex gap-4 mt-8">
         <Button asChild variant="outline" size="lg">
           <Link href="/portfolio">PORTFOLIO</Link>
         </Button>
