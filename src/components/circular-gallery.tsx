@@ -497,6 +497,9 @@ class App {
         
         if (closestMedia && minDistance < (closestMedia.plane.scale as Vec3).x / 2) {
             if (closestMedia.url && this.router) {
+                if (this.raf) {
+                    window.cancelAnimationFrame(this.raf);
+                }
                 this.router.push(closestMedia.url);
             }
         }
