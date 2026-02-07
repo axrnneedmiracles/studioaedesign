@@ -353,6 +353,7 @@ class App {
   router: any;
   isDragging: boolean = false;
   clickStartPos: { x: number, y: number } | null = null;
+  isDestroyed: boolean = false;
 
   constructor(
     container: HTMLDivElement,
@@ -497,10 +498,10 @@ class App {
         
         if (closestMedia && minDistance < (closestMedia.plane.scale as Vec3).x / 2) {
             if (closestMedia.url && this.router) {
-                if (this.raf) {
-                    window.cancelAnimationFrame(this.raf);
-                }
-                this.router.push(closestMedia.url);
+                this.destroy();
+                setTimeout(() => {
+                    this.router.push(closestMedia!.url);
+                }, 0);
             }
         }
     }
@@ -589,9 +590,12 @@ class App {
   }
 
   destroy() {
+    if (this.isDestroyed) return;
+    this.isDestroyed = true;
+
     if (this.interactionTimeout) clearTimeout(this.interactionTimeout);
     if (typeof window !== 'undefined') {
-        window.cancelAnimationFrame(this.raf);
+        if(this.raf) window.cancelAnimationFrame(this.raf);
         window.removeEventListener('resize', this.boundOnResize);
         window.removeEventListener('mousewheel', this.boundOnWheel);
         window.removeEventListener('wheel', this.boundOnWheel);
@@ -602,8 +606,8 @@ class App {
         window.removeEventListener('touchmove', this.boundOnTouchMove);
         window.removeEventListener('touchend', this.boundOnTouchUp);
     }
-    if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
-      this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
+    if (this.renderer && this.renderer.gl && this.container.contains(this.renderer.gl.canvas)) {
+      this.container.removeChild(this.renderer.gl.canvas);
     }
   }
 }
