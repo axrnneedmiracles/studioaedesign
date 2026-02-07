@@ -342,6 +342,10 @@ class App {
   boundOnTouchMove: (e: MouseEvent | TouchEvent) => void;
   boundOnTouchUp: () => void;
 
+  isInteracting: boolean;
+  interactionTimeout: NodeJS.Timeout | null;
+  autoScrollSpeed: number;
+
   constructor(
     container: HTMLDivElement,
     {
@@ -351,8 +355,9 @@ class App {
       borderRadius = 0,
       font = 'bold 30px Figtree',
       scrollSpeed = 2,
-      scrollEase = 0.05
-    }: { items?: { image: string; text: string }[], bend: number, textColor?: string, borderRadius?: number, font?: string, scrollSpeed?: number, scrollEase?: number }
+      scrollEase = 0.05,
+      autoScrollSpeed = 0
+    }: { items?: { image: string; text: string }[], bend: number, textColor?: string, borderRadius?: number, font?: string, scrollSpeed?: number, scrollEase?: number, autoScrollSpeed?: number }
   ) {
     if(typeof document !== 'undefined') {
         document.documentElement.classList.remove('no-js');
@@ -361,6 +366,11 @@ class App {
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
+
+    this.isInteracting = false;
+    this.interactionTimeout = null;
+    this.autoScrollSpeed = autoScrollSpeed;
+
     autoBind(this);
     this.createRenderer();
     this.createCamera();
@@ -432,6 +442,8 @@ class App {
   }
 
   onTouchDown(e: MouseEvent | TouchEvent) {
+    this.isInteracting = true;
+    if (this.interactionTimeout) clearTimeout(this.interactionTimeout);
     this.isDown = true;
     this.scroll.position = this.scroll.current;
     this.start = 'touches' in e ? e.touches[0].clientX : e.clientX;
@@ -446,10 +458,20 @@ class App {
 
   onTouchUp() {
     this.isDown = false;
+    if (this.interactionTimeout) clearTimeout(this.interactionTimeout);
+    this.interactionTimeout = setTimeout(() => {
+        this.isInteracting = false;
+    }, 2000);
     this.onCheck();
   }
 
   onWheel(e: WheelEvent) {
+    this.isInteracting = true;
+    if (this.interactionTimeout) clearTimeout(this.interactionTimeout);
+    this.interactionTimeout = setTimeout(() => {
+        this.isInteracting = false;
+    }, 2000);
+
     const delta = e.deltaY || e.wheelDelta || e.detail;
     this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
     this.onCheckDebounce();
@@ -483,6 +505,9 @@ class App {
   }
 
   update() {
+    if (!this.isInteracting) {
+        this.scroll.target += this.autoScrollSpeed;
+    }
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
     const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
     if (this.medias) {
@@ -515,6 +540,7 @@ class App {
   }
 
   destroy() {
+    if (this.interactionTimeout) clearTimeout(this.interactionTimeout);
     if (typeof window !== 'undefined') {
         window.cancelAnimationFrame(this.raf);
         window.removeEventListener('resize', this.boundOnResize);
@@ -541,6 +567,7 @@ type CircularGalleryProps = {
   font?: string;
   scrollSpeed?: number;
   scrollEase?: number;
+  autoScrollSpeed?: number;
 }
 
 export default function CircularGallery({
@@ -550,15 +577,16 @@ export default function CircularGallery({
   borderRadius = 0.05,
   font = 'bold 30px Figtree',
   scrollSpeed = 2,
-  scrollEase = 0.05
+  scrollEase = 0.05,
+  autoScrollSpeed = 0,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!containerRef.current) return;
-    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase });
+    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, autoScrollSpeed });
     return () => {
       app.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
+  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, autoScrollSpeed]);
   return <div className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing" ref={containerRef} />;
 }

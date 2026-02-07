@@ -26,7 +26,7 @@ export default function Home() {
         className="text-4xl md:text-6xl font-headline text-center font-bold mt-20"
       />
       <div className="w-full h-[600px] relative">
-        <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={2} />
+        <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={2} autoScrollSpeed={0.1} />
       </div>
     </div>
   );
