@@ -36,7 +36,7 @@ export default function Home() {
           <Link href="/contact">CONTACT US</Link>
         </Button>
       </div>
-      <div className="w-full h-[500px] relative">
+      <div className="w-full h-[450px] relative">
         <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={2} autoScrollSpeed={0.05} />
       </div>
     </div>
