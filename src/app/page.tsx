@@ -1,3 +1,4 @@
+
 import CircularGallery from '@/components/circular-gallery';
 import TextType from '@/components/text-type';
 import { Button } from '@/components/ui/button';
@@ -27,7 +28,7 @@ export default function Home() {
         loop={false}
         className="text-4xl md:text-6xl font-headline text-center font-bold"
       />
-      <div className="flex gap-4 mt-16">
+      <div className="flex gap-4 mt-20">
         <Button asChild variant="outline" size="lg">
           <Link href="/portfolio">PORTFOLIO</Link>
         </Button>
