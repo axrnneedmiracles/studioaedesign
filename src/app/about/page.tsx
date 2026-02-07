@@ -1,7 +1,4 @@
-import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { teamMembers } from '@/lib/data';
+
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,48 +14,29 @@ export default function AboutPage() {
           About BITRATE STUDIO
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground">
-          Crafting stories that captivate, inspire, and endure.
+          Turning ideas into impactful visual and digital experiences.
         </p>
       </header>
 
-      <section id="vision" className="mb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-80 md:h-96 rounded-lg overflow-hidden">
-            <Image
-              src="https://picsum.photos/seed/about-vision/800/600"
-              alt="Studio collaborative environment"
-              fill
-              className="object-cover"
-              data-ai-hint="creative workspace"
-            />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold font-headline mb-4">Our Vision</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              At BITRATE STUDIO, we believe in the power of visual storytelling. Our mission is to transform ideas into unforgettable visual experiences. We are a collective of passionate artists, designers, and strategists dedicated to pushing the boundaries of creativity and delivering excellence in every project. We strive to build lasting partnerships with our clients, understanding their goals to create work that is not only beautiful but also meaningful and effective.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="team">
-        <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12">
-          Meet Our Team
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {teamMembers.map((member) => (
-            <Card key={member.id} className="text-center">
-              <CardContent className="p-6">
-                <Avatar className="w-24 h-24 mx-auto mb-4">
-                  <AvatarImage src={member.imageUrl} alt={member.name} data-ai-hint={member.imageHint} />
-                  <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <h3 className="text-lg font-semibold">{member.name}</h3>
-                <p className="text-accent">{member.role}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+      <section className="max-w-3xl mx-auto space-y-6 text-muted-foreground leading-relaxed text-left">
+        <p>
+          We are a creative media team focused on turning ideas into impactful visual and digital experiences. From concept to execution, we handle media-related work with precision, creativity, and a strong understanding of modern platforms.
+        </p>
+        <p>
+          We have worked with various <span className="text-accent-foreground font-semibold">COMPANIES, CONTENT CREATORS, INDIVIDUALS</span>, and <span className="text-accent-foreground font-semibold">ORGANIZATIONS</span> across different industries. Our services currently include <span className="text-accent-foreground font-semibold">VIDEO EDITING</span> (using davinci, after effects),  <span className="text-accent-foreground font-semibold">PHOTO EDITING</span> (using photoshop and canva), <span className="text-accent-foreground font-semibold">MUSIC BEATS</span> and <span className="text-accent-foreground font-semibold">SOUND PRODUCTION</span> (using FL Studio), <span className="text-accent-foreground font-semibold">WEB DEVELOPMENT</span>, <span className="text-accent-foreground font-semibold">PHOTOGRAPHY</span> (local on-site service), and <span className="text-accent-foreground font-semibold">3D work</span> (using Blender for animations, models, and video elements.)
+        </p>
+        <p>
+          Our team has collaborated with Creators and <span className="text-accent-foreground font-semibold">BRANDS</span> on platforms such as Twitch, YouTube, X (Twitter), and Instagram, as well as on News Content and Company Advertisements. We have experience editing a wide range of video styles, including <span className="text-accent-foreground font-semibold">VLOGS, GAMING VIDEOS, BIOGRAPHIES, CINEMATIC EDITS</span>, AND <span className="text-accent-foreground font-semibold">ADVERTISEMENTS</span>.
+        </p>
+        <p>
+          In game development, we have <span className="text-accent-foreground font-semibold">WORKED</span> with <span className="text-accent-foreground font-semibold">MULTIPLE INDIE STUDIOS</span> and have also collaborated with <span className="text-accent-foreground font-semibold">INTEL GAMING</span> for game testing purposes.
+        </p>
+        <p>
+          We also create <span className="text-accent-foreground font-semibold">ORIGINAL BEATS</span> from scratch, tailored entirely to your specific needs.
+        </p>
+        <p>
+          Photography services are currently available for local sites only. Please contact us if you need more information or want to discuss availability.
+        </p>
       </section>
     </div>
   );
