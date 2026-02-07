@@ -5,19 +5,19 @@ import Link from 'next/link';
 
 export default function Home() {
   const galleryItems = [
-    { image: '/aftereffects_logo.png', text: 'After Effects' },
-    { image: '/blender_logo.png', text: 'Blender' },
-    { image: '/canva_logo.png', text: 'Canva' },
-    { image: '/davinci_logo.png', text: 'DaVinci Resolve' },
-    { image: '/flnew_logo.png', text: 'FL Studio' },
-    { image: '/h_logo.png', text: 'Houdini' },
-    { image: '/unity_logo.png', text: 'Unity' },
-    { image: '/web_logo.png', text: 'Web Dev' },
+    { image: '/aftereffects_logo.png', text: 'After Effects', url: '/portfolio/after-effects' },
+    { image: '/blender_logo.png', text: 'Blender', url: '/portfolio/blender' },
+    { image: '/canva_logo.png', text: 'Canva', url: '/portfolio/canva' },
+    { image: '/davinci_logo.png', text: 'DaVinci Resolve', url: '/portfolio/davinci' },
+    { image: '/flnew_logo.png', text: 'FL Studio', url: '/portfolio/fl-studio' },
+    { image: '/h_logo.png', text: 'Houdini', url: '/portfolio/houdini' },
+    { image: '/unity_logo.png', text: 'Unity', url: '/portfolio/unity' },
+    { image: '/web_logo.png', text: 'Web Dev', url: '/portfolio/web-dev' },
   ];
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <div className="pt-28 text-center flex-shrink-0">
+      <div className="pt-32 text-center flex-shrink-0">
         <TextType
           as="h1"
           text={['WELCOME TO BITRATE STUDIO']}
@@ -39,7 +39,7 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <div className="w-full flex-1 relative -mt-12 pb-8">
+      <div className="w-full flex-1 relative -mt-[4.5rem] pb-8">
         <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={0.5} autoScrollSpeed={0.05} />
       </div>
     </div>

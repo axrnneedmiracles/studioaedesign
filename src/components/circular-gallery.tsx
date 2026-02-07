@@ -2,6 +2,7 @@
 
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Vec3 } from 'ogl';
 import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
@@ -113,6 +114,7 @@ class Media {
   scene: Transform;
   screen: { width: number; height: number };
   text: string;
+  url?: string;
   viewport: { width: number; height: number };
   bend: number;
   textColor: string;
@@ -141,12 +143,13 @@ class Media {
     scene,
     screen,
     text,
+    url,
     viewport,
     bend,
     textColor,
     borderRadius = 0,
     font
-  }: { geometry: Plane, gl: Renderer['gl'], image: string, index: number, length: number, renderer: Renderer, scene: Transform, screen: any, text: string, viewport: any, bend: number, textColor: string, borderRadius?: number, font: string }) {
+  }: { geometry: Plane, gl: Renderer['gl'], image: string, index: number, length: number, renderer: Renderer, scene: Transform, screen: any, text: string, url?: string, viewport: any, bend: number, textColor: string, borderRadius?: number, font: string }) {
     this.extra = 0;
     this.geometry = geometry;
     this.gl = gl;
@@ -157,6 +160,7 @@ class Media {
     this.scene = scene;
     this.screen = screen;
     this.text = text;
+    this.url = url;
     this.viewport = viewport;
     this.bend = bend;
     this.textColor = textColor;
@@ -329,7 +333,7 @@ class App {
   camera!: Camera;
   scene!: Transform;
   planeGeometry!: Plane;
-  mediasImages!: { image: string, text: string }[];
+  mediasImages!: { image: string, text: string, url?: string }[];
   medias!: Media[];
   isDown!: boolean;
   start!: number;
@@ -346,6 +350,10 @@ class App {
   interactionTimeout: NodeJS.Timeout | null;
   autoScrollSpeed: number;
 
+  router: any;
+  isDragging: boolean = false;
+  clickStartPos: { x: number, y: number } | null = null;
+
   constructor(
     container: HTMLDivElement,
     {
@@ -356,13 +364,15 @@ class App {
       font = 'bold 30px Figtree',
       scrollSpeed = 2,
       scrollEase = 0.05,
-      autoScrollSpeed = 0
-    }: { items?: { image: string; text: string }[], bend: number, textColor?: string, borderRadius?: number, font?: string, scrollSpeed?: number, scrollEase?: number, autoScrollSpeed?: number }
+      autoScrollSpeed = 0,
+      router
+    }: { items?: { image: string; text: string, url?: string }[], bend: number, textColor?: string, borderRadius?: number, font?: string, scrollSpeed?: number, scrollEase?: number, autoScrollSpeed?: number, router: any }
   ) {
     if(typeof document !== 'undefined') {
         document.documentElement.classList.remove('no-js');
     }
     this.container = container;
+    this.router = router;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
@@ -410,7 +420,7 @@ class App {
     });
   }
 
-  createMedias(items: { image: string; text: string }[] | undefined, bend = 1, textColor: string, borderRadius: number, font: string) {
+  createMedias(items: { image: string; text: string, url?: string }[] | undefined, bend = 1, textColor: string, borderRadius: number, font: string) {
     const defaultItems = [
       { image: `https://picsum.photos/seed/1/800/600?grayscale`, text: 'Blender' },
       { image: `https://picsum.photos/seed/2/800/600?grayscale`, text: 'DaVinci Resolve' },
@@ -432,6 +442,7 @@ class App {
         scene: this.scene,
         screen: this.screen,
         text: data.text,
+        url: data.url,
         viewport: this.viewport,
         bend,
         textColor,
@@ -446,11 +457,24 @@ class App {
     if (this.interactionTimeout) clearTimeout(this.interactionTimeout);
     this.isDown = true;
     this.scroll.position = this.scroll.current;
-    this.start = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const touch = 'touches' in e ? e.touches[0] : e;
+    this.start = touch.clientX;
+    
+    // For click detection
+    this.clickStartPos = {x: touch.clientX, y: touch.clientY};
+    this.isDragging = false;
   }
 
   onTouchMove(e: MouseEvent | TouchEvent) {
     if (!this.isDown) return;
+    
+    if (!this.isDragging) {
+      const touch = 'touches' in e ? e.touches[0] : e;
+      if (this.clickStartPos && (Math.abs(touch.clientX - this.clickStartPos.x) > 5 || Math.abs(touch.clientY - this.clickStartPos.y) > 5)) {
+        this.isDragging = true;
+      }
+    }
+
     const x = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
     this.scroll.target = this.scroll.position! + distance;
@@ -458,11 +482,33 @@ class App {
 
   onTouchUp() {
     this.isDown = false;
+
+    if (!this.isDragging) {
+        let closestMedia: Media | null = null;
+        let minDistance = Infinity;
+
+        this.medias.forEach(media => {
+            const distance = Math.abs(media.plane.position.x);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestMedia = media;
+            }
+        });
+        
+        if (closestMedia && minDistance < (closestMedia.plane.scale as Vec3).x / 2) {
+            if (closestMedia.url && this.router) {
+                this.router.push(closestMedia.url);
+            }
+        }
+    }
+    
     if (this.interactionTimeout) clearTimeout(this.interactionTimeout);
     this.interactionTimeout = setTimeout(() => {
         this.isInteracting = false;
     }, 2000);
     this.onCheck();
+    
+    this.isDragging = false;
   }
 
   onWheel(e: WheelEvent) {
@@ -560,7 +606,7 @@ class App {
 }
 
 type CircularGalleryProps = {
-  items?: { image: string, text: string }[];
+  items?: { image: string, text: string, url?: string }[];
   bend?: number;
   textColor?: string;
   borderRadius?: number;
@@ -581,12 +627,13 @@ export default function CircularGallery({
   autoScrollSpeed = 0,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   useEffect(() => {
     if (!containerRef.current) return;
-    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, autoScrollSpeed });
+    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, autoScrollSpeed, router });
     return () => {
       app.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, autoScrollSpeed]);
-  return <div className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing" ref={containerRef} />;
+  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, autoScrollSpeed, router]);
+  return <div className="w-full h-full overflow-hidden cursor-pointer active:cursor-grabbing" ref={containerRef} />;
 }
