@@ -1,5 +1,7 @@
 import CircularGallery from '@/components/circular-gallery';
 import TextType from '@/components/text-type';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function Home() {
   const galleryItems = [
@@ -14,7 +16,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-grow flex flex-col items-center justify-between h-screen py-10">
+    <div className="flex-grow flex flex-col items-center justify-center h-screen py-10 space-y-12">
       <TextType
         as="h1"
         text={['WELCOME TO BITRATE STUDIO']}
@@ -23,8 +25,16 @@ export default function Home() {
         showCursor
         cursorCharacter="█"
         loop={false}
-        className="text-4xl md:text-6xl font-headline text-center font-bold mt-20"
+        className="text-4xl md:text-6xl font-headline text-center font-bold"
       />
+      <div className="flex gap-4">
+        <Button asChild variant="outline" size="lg">
+          <Link href="/portfolio">PORTFOLIO</Link>
+        </Button>
+        <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+          <Link href="/contact">CONTACT US</Link>
+        </Button>
+      </div>
       <div className="w-full h-[600px] relative">
         <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={2} autoScrollSpeed={0.1} />
       </div>
