@@ -17,8 +17,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="text-center pt-20">
+    <div className="flex flex-col h-screen overflow-hidden">
+      <div className="pt-24 text-center flex-shrink-0">
         <TextType
           as="h1"
           text={['WELCOME TO BITRATE STUDIO']}
@@ -29,7 +29,9 @@ export default function Home() {
           loop={false}
           className="text-4xl md:text-6xl font-headline font-bold"
         />
-        <div className="inline-flex gap-4 my-8">
+      </div>
+      <div className="my-8 text-center flex-shrink-0 relative z-10">
+        <div className="inline-flex gap-4">
           <Button asChild size="lg">
             <Link href="/portfolio">PORTFOLIO</Link>
           </Button>
@@ -38,7 +40,7 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <div className="w-full flex-grow relative">
+      <div className="w-full flex-1 relative -mt-20">
         <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={0.5} autoScrollSpeed={0.05} />
       </div>
     </div>
