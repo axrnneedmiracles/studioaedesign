@@ -17,7 +17,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-grow flex flex-col items-center pt-20">
+    <div className="flex-grow flex flex-col items-center pt-2">
       <TextType
         as="h1"
         text={['WELCOME TO BITRATE STUDIO']}
@@ -28,7 +28,7 @@ export default function Home() {
         loop={false}
         className="text-4xl md:text-6xl font-headline text-center font-bold"
       />
-      <div className="inline-flex gap-4 mt-4 mb-2">
+      <div className="inline-flex gap-4 my-2">
         <Button asChild size="lg">
           <Link href="/portfolio">PORTFOLIO</Link>
         </Button>
