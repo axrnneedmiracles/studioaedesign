@@ -3,7 +3,6 @@
 import { FC, MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import ClickSpark from './click-spark';
-import Image from 'next/image';
 
 interface ChromaGridItem {
   image: string;
@@ -126,7 +125,7 @@ const ChromaGrid: FC<ChromaGridProps> = ({ items, className = '' }) => {
                 }}
               />
               <div className="relative z-0 flex-1 p-[10px] min-h-0 flex items-center justify-center">
-                <Image src={c.image} alt={c.title} fill className="object-contain" />
+                <img src={c.image} alt={c.title} className="absolute inset-0 w-full h-full object-contain" />
               </div>
               <footer className="relative z-10 px-[10px] py-2 text-white font-sans flex justify-center items-center bg-black/70 flex-shrink-0">
                 <h3 className="m-0 text-base font-semibold">{c.title}</h3>
