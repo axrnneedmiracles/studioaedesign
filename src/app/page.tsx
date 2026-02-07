@@ -39,7 +39,7 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <div className="w-full flex-1 relative -mt-24 pb-8">
+      <div className="w-full flex-1 relative -mt-20 pb-8">
         <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={0.5} autoScrollSpeed={0.05} />
       </div>
     </div>
