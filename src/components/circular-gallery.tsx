@@ -1,6 +1,6 @@
 'use client';
 
-import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Vec3 } from 'ogl';
+import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Vec3, Raycast, Vec2 } from 'ogl';
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -344,7 +344,7 @@ class App {
   boundOnWheel: (e: WheelEvent) => void;
   boundOnTouchDown: (e: MouseEvent | TouchEvent) => void;
   boundOnTouchMove: (e: MouseEvent | TouchEvent) => void;
-  boundOnTouchUp: () => void;
+  boundOnTouchUp: (e: MouseEvent | TouchEvent) => void;
 
   isInteracting: boolean;
   interactionTimeout: NodeJS.Timeout | null;
@@ -354,6 +354,9 @@ class App {
   isDragging: boolean = false;
   clickStartPos: { x: number, y: number } | null = null;
   isDestroyed: boolean = false;
+
+  raycaster: Raycast;
+  mouse: Vec2;
 
   constructor(
     container: HTMLDivElement,
@@ -386,6 +389,10 @@ class App {
     this.createRenderer();
     this.createCamera();
     this.createScene();
+    
+    this.raycaster = new Raycast(this.gl);
+    this.mouse = new Vec2();
+
     this.onResize();
     this.createGeometry();
     this.createMedias(items, bend, textColor, borderRadius, font);
@@ -481,27 +488,31 @@ class App {
     this.scroll.target = this.scroll.position! + distance;
   }
 
-  onTouchUp() {
+  onTouchUp(e: MouseEvent | TouchEvent) {
     this.isDown = false;
 
     if (!this.isDragging) {
-        let closestMedia: Media | null = null;
-        let minDistance = Infinity;
+        const touch = 'changedTouches' in e ? e.changedTouches[0] : e;
+        const rect = this.renderer.gl.canvas.getBoundingClientRect();
 
-        this.medias.forEach(media => {
-            const distance = Math.abs(media.plane.position.x);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestMedia = media;
-            }
-        });
+        this.mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+        this.mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+
+        this.raycaster.cast(this.mouse, this.camera);
         
-        if (closestMedia && minDistance < (closestMedia.plane.scale as Vec3).x / 2) {
-            if (closestMedia.url && this.router) {
+        const planes = this.medias.map(media => media.plane);
+        const intersects = this.raycaster.intersect(planes);
+        
+        if (intersects.length > 0) {
+            const clickedPlane = intersects[0];
+            const clickedMedia = this.medias.find(media => media.plane === clickedPlane);
+            
+            if (clickedMedia && clickedMedia.url && this.router) {
                 this.destroy();
                 setTimeout(() => {
-                    this.router.push(closestMedia!.url);
+                    this.router.push(clickedMedia.url!);
                 }, 0);
+                return;
             }
         }
     }
@@ -555,6 +566,7 @@ class App {
   }
 
   update() {
+    if (this.isDestroyed) return;
     if (!this.isInteracting) {
         this.scroll.target += this.autoScrollSpeed;
     }
