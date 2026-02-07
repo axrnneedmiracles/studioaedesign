@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Pause } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
+import { cn } from '@/lib/utils';
 
 const projects = [
   { id: 1, title: 'Project Alpha', src: '/music/track1.mp3' },
@@ -16,6 +18,8 @@ export function MusicVisualizer() {
   const [currentSongIndex, setCurrentSongIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
   
   const audioRef = useRef<HTMLAudioElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -44,13 +48,11 @@ export function MusicVisualizer() {
   }, [isInitialized]);
 
   const handlePlayPause = (index: number) => {
-    // Resume AudioContext if it's suspended
     if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
       audioContextRef.current.resume();
     }
 
     if (currentSongIndex === index) {
-      // Toggle play/pause for the current song
       if (isPlaying) {
         audioRef.current?.pause();
         setIsPlaying(false);
@@ -59,7 +61,6 @@ export function MusicVisualizer() {
         setIsPlaying(true);
       }
     } else {
-      // Play a new song
       setCurrentSongIndex(index);
       setIsPlaying(true);
     }
@@ -69,6 +70,8 @@ export function MusicVisualizer() {
     if (currentSongIndex !== null && audioRef.current) {
         audioRef.current.src = projects[currentSongIndex].src;
         audioRef.current.play().catch(e => console.error("Error playing audio:", e));
+        setCurrentTime(0);
+        setDuration(0);
     }
   }, [currentSongIndex]);
 
@@ -129,17 +132,34 @@ export function MusicVisualizer() {
   useEffect(() => {
     const handleResize = () => {
       if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
+        const parent = canvasRef.current.parentElement;
+        if (parent) {
+          canvasRef.current.width = parent.clientWidth;
+        }
       }
     };
     window.addEventListener('resize', handleResize);
-    handleResize(); // Initial set
+    handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleInitialInteraction = () => {
     if (!isInitialized) {
       setupAudioContext();
+    }
+  };
+
+  const formatTime = (time: number) => {
+    if (isNaN(time) || time === 0) return '0:00';
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleSliderChange = (value: number[]) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = value[0];
+      setCurrentTime(value[0]);
     }
   };
 
@@ -168,6 +188,22 @@ export function MusicVisualizer() {
           </Button>
         ))}
       </div>
+
+      <div className="w-full max-w-md px-4">
+        <div className="flex items-center gap-4">
+            <span className="text-sm text-muted-foreground w-12 text-center">{formatTime(currentTime)}</span>
+            <Slider
+                value={[currentTime]}
+                max={duration || 1}
+                step={1}
+                onValueChange={handleSliderChange}
+                disabled={currentSongIndex === null}
+                className={cn(currentSongIndex === null && "opacity-50 cursor-not-allowed")}
+            />
+            <span className="text-sm text-muted-foreground w-12 text-center">{formatTime(duration)}</span>
+        </div>
+      </div>
+      
       <audio
         ref={audioRef}
         onPlay={() => setIsPlaying(true)}
@@ -175,19 +211,26 @@ export function MusicVisualizer() {
         onEnded={() => {
             setIsPlaying(false);
             if (currentSongIndex !== null && currentSongIndex < projects.length - 1) {
-                // Autoplay next song
                 setCurrentSongIndex(currentSongIndex + 1);
             } else {
-                setCurrentSongIndex(null); // End of playlist
+                setCurrentSongIndex(null);
             }
+        }}
+        onLoadedMetadata={() => {
+          if (audioRef.current) setDuration(audioRef.current.duration);
+        }}
+        onTimeUpdate={() => {
+          if (audioRef.current) setCurrentTime(audioRef.current.currentTime);
         }}
         crossOrigin="anonymous"
       />
-      <canvas
-        ref={canvasRef}
-        className="fixed bottom-0 left-0 w-full h-48 pointer-events-none"
-        height="192"
-      />
+      <div className="fixed bottom-0 left-0 w-full h-48 pointer-events-none">
+        <canvas
+            ref={canvasRef}
+            className="w-full h-full"
+            height="192"
+        />
+      </div>
     </div>
   );
 }
