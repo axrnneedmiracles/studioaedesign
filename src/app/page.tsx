@@ -17,7 +17,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-grow flex flex-col items-center h-screen pt-32">
+    <div className="flex-grow flex flex-col items-center pt-32">
       <TextType
         as="h1"
         text={['WELCOME TO BITRATE STUDIO']}
@@ -30,12 +30,12 @@ export default function Home() {
       />
       <div className="flex gap-4 mt-20">
         <div className="shining-border-wrapper">
-          <Button asChild size="lg" className="relative bg-background text-foreground hover:bg-accent hover:text-accent-foreground w-full h-full">
+          <Button asChild size="lg" className="relative bg-background text-foreground hover:bg-accent hover:text-accent-foreground">
             <Link href="/portfolio">PORTFOLIO</Link>
           </Button>
         </div>
         <div className="shining-border-wrapper">
-          <Button asChild size="lg" className="relative bg-accent text-accent-foreground hover:bg-accent/90 w-full h-full">
+          <Button asChild size="lg" className="relative bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="/contact">CONTACT US</Link>
           </Button>
         </div>
