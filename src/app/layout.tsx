@@ -42,11 +42,7 @@ export default function RootLayout({
       <head />
       <body className="font-body antialiased flex flex-col min-h-screen bg-background">
         <LayoutClient>
-          <SplashCursor
-            DENSITY_DISSIPATION={1.0}
-            VELOCITY_DISSIPATION={0.9}
-            SPLAT_FORCE={4000}
-          />
+          <SplashCursor />
           <StaggeredMenu
               isFixed={true}
               items={menuItems}
@@ -56,16 +52,16 @@ export default function RootLayout({
             <LightPillar
               topColor="#5227FF"
               bottomColor="#FF9FFC"
-              intensity={0.1}
+              intensity={0.5}
               rotationSpeed={0.3}
-              glowAmount={0.001}
+              glowAmount={0.003}
               pillarWidth={3}
               pillarHeight={0.4}
               noiseIntensity={0.3}
               pillarRotation={25}
               interactive={false}
               mixBlendMode="screen"
-              quality="high"
+              quality="medium"
             />
           </div>
 
