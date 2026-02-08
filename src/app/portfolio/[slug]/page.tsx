@@ -130,7 +130,7 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
                     </a>
                 </Button>
                 <Button asChild variant="outline">
-                    <a href="https://park-conscious.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.parkconscious.in/" target="_blank" rel="noopener noreferrer">
                         PARK CONSCIOUS
                     </a>
                 </Button>
