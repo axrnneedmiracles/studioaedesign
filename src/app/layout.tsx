@@ -59,7 +59,7 @@ export default function RootLayout({
               pillarRotation={25}
               interactive={false}
               mixBlendMode="screen"
-              quality="high"
+              quality="low"
             />
           </div>
 

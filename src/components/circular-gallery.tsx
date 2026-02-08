@@ -510,9 +510,7 @@ class App {
             
             if (clickedMedia && clickedMedia.url && this.router) {
                 this.destroy();
-                setTimeout(() => {
-                    this.router.push(clickedMedia.url!);
-                }, 0);
+                this.router.push(clickedMedia.url!);
                 return;
             }
         }
