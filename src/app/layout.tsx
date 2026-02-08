@@ -48,7 +48,7 @@ export default function RootLayout({
               items={menuItems}
               socialItems={socialItems}
             />
-           <div className="fixed top-0 left-0 -z-10 h-full w-full">
+           <div className="fixed top-0 left-0 -z-20 h-full w-full">
             <LightPillar
               topColor="#5227FF"
               bottomColor="#FF9FFC"
