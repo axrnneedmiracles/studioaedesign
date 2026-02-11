@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Play, Pause } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
+import { Skeleton } from './ui/skeleton';
 
 const projects = [
   { id: 1, title: 'DISTORTED HOPE', src: '/music/track1.mp3' },
@@ -20,6 +21,7 @@ export function MusicVisualizer() {
   const [isInitialized, setIsInitialized] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [isClient, setIsClient] = useState(false);
   
   const audioRef = useRef<HTMLAudioElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -28,6 +30,10 @@ export function MusicVisualizer() {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
   const animationFrameId = useRef<number | null>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const setupAudioContext = useCallback(() => {
     if (!audioRef.current || isInitialized) return;
@@ -162,6 +168,28 @@ export function MusicVisualizer() {
       setCurrentTime(value[0]);
     }
   };
+  
+  if (!isClient) {
+    return (
+      <div className="w-full flex flex-col items-center">
+          <p className="text-muted-foreground mb-8 text-center">
+              CLICK TO LISTEN THE SONG
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {projects.map((project) => (
+                  <Skeleton key={project.id} className="h-10 w-48" />
+              ))}
+          </div>
+          <div className="w-full max-w-md px-4">
+              <div className="flex items-center gap-4">
+                  <Skeleton className="h-4 w-12" />
+                  <Skeleton className="h-5 w-full rounded-full" />
+                  <Skeleton className="h-4 w-12" />
+              </div>
+          </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full flex flex-col items-center">
