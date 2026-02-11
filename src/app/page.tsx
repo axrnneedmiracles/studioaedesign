@@ -1,7 +1,8 @@
-import CircularGallery from '@/components/circular-gallery';
+
 import TextType from '@/components/text-type';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import HomeCircularGallery from '@/components/home-circular-gallery';
 
 export default function Home() {
   const galleryItems = [
@@ -17,7 +18,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <div className="pt-32 text-center flex-shrink-0">
+      <div className="pt-32 text-center flex-shrink-0 min-h-[188px] flex flex-col justify-center">
         <TextType
           as="h1"
           text={['WELCOME TO BITRATE STUDIO']}
@@ -40,7 +41,7 @@ export default function Home() {
         </div>
       </div>
       <div className="w-full flex-1 relative -mt-[4.5rem] pb-8">
-        <CircularGallery items={galleryItems} bend={1} textColor="#ffffff" borderRadius={0.05} scrollEase={0.05} scrollSpeed={0.5} autoScrollSpeed={0.05} />
+        <HomeCircularGallery items={galleryItems} />
       </div>
     </div>
   );

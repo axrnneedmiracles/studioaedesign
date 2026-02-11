@@ -5,7 +5,6 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import StaggeredMenu from '@/components/staggered-menu';
 import LayoutClient from '@/components/layout-client';
-import LightPillar from '@/components/light-pillar';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -46,23 +45,6 @@ export default function RootLayout({
               items={menuItems}
               socialItems={socialItems}
             />
-           <div className="fixed top-0 left-0 -z-20 h-full w-full">
-            <LightPillar
-              topColor="#5227FF"
-              bottomColor="#FF9FFC"
-              intensity={1}
-              rotationSpeed={0.3}
-              glowAmount={0.003}
-              pillarWidth={5.5}
-              pillarHeight={0.4}
-              noiseIntensity={0.5}
-              pillarRotation={26}
-              interactive={false}
-              mixBlendMode="screen"
-              quality="medium"
-            />
-          </div>
-
           <div className="relative z-0 flex flex-col min-h-screen">
             <main className="flex-grow">{children}</main>
           </div>
