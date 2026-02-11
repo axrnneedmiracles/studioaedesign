@@ -6,7 +6,6 @@ import { Toaster } from '@/components/ui/toaster';
 import StaggeredMenu from '@/components/staggered-menu';
 import LayoutClient from '@/components/layout-client';
 import LightPillar from '@/components/light-pillar';
-import SplashCursor from '@/components/splash-cursor';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -42,7 +41,6 @@ export default function RootLayout({
       <head />
       <body className="font-body antialiased flex flex-col min-h-screen bg-background">
         <LayoutClient>
-          <SplashCursor />
           <StaggeredMenu
               isFixed={true}
               items={menuItems}
