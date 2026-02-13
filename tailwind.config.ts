@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      transitionTimingFunction: {
+        'custom-ease': 'cubic-bezier(0.5, 1, 0.89, 1)',
+      },
       fontFamily: {
         body: ['var(--font-inter)', 'sans-serif'],
         headline: ['var(--font-inter)', 'sans-serif'],
