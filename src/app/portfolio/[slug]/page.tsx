@@ -29,7 +29,7 @@ const portfolioItems = [
   'web-dev',
   'unity',
   'fl-studio',
-  'houdini',
+  'figma',
   'video-editing',
 ];
 

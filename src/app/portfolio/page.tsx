@@ -1,3 +1,4 @@
+
 import ChromaGrid from '@/components/chroma-grid';
 import type { Metadata } from 'next';
 
@@ -43,11 +44,11 @@ const portfolioItems = [
     gradient: 'linear-gradient(145deg, #888888, #222C36, #000)',
   },
   {
-    image: '/h_logo.png',
-    title: 'Houdini',
-    url: '/portfolio/houdini',
-    borderColor: '#FF7000',
-    gradient: 'linear-gradient(145deg, #FF7000, #F7B500, #000)',
+    image: '/figma_logo.png',
+    title: 'Figma',
+    url: '/portfolio/figma',
+    borderColor: '#0ACF83',
+    gradient: 'linear-gradient(145deg, #0ACF83, #A259FF, #000)',
   },
   {
     image: '/web_logo.png',

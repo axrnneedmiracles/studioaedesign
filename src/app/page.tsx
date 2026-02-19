@@ -11,7 +11,7 @@ export default function Home() {
     { image: '/canva_logo.png', text: 'Canva', url: '/portfolio/canva' },
     { image: '/davinci_logo.png', text: 'DaVinci Resolve', url: '/portfolio/davinci' },
     { image: '/flnew_logo.png', text: 'FL Studio', url: '/portfolio/fl-studio' },
-    { image: '/h_logo.png', text: 'Houdini', url: '/portfolio/houdini' },
+    { image: '/figma_logo.png', text: 'Figma', url: '/portfolio/figma' },
     { image: '/unity_logo.png', text: 'Unity', url: '/portfolio/unity' },
     { image: '/web_logo.png', text: 'Web Dev', url: '/portfolio/web-dev' },
   ];
