@@ -15,7 +15,7 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
         <LightPillar
           topColor="#5227FF"
           bottomColor="#FF9FFC"
-          intensity={1}
+          intensity={1.2}
           rotationSpeed={0.3}
           glowAmount={0.003}
           pillarWidth={5.5}
@@ -24,7 +24,7 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
           pillarRotation={26}
           interactive={false}
           mixBlendMode="screen"
-          quality="low"
+          quality="medium"
         />
       </div>
       {children}
