@@ -1,4 +1,3 @@
-
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -20,9 +19,7 @@ import BlurText from '@/components/blur-text';
 import { CanvaShowcase } from '@/components/canva-showcase';
 import FlStudioLoader from '@/components/fl-studio-loader';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
-
-const SplineViewer = dynamic(() => import('@/components/spline-viewer'), { ssr: false });
+import FigmaPortfolio from '@/components/FigmaPortfolio';
 
 
 const portfolioItems = [
@@ -73,19 +70,7 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
     .join(' ');
   
   if (params.slug === 'figma') {
-    return (
-      <div className="relative h-screen w-screen">
-        <SplineViewer url="https://prod.spline.design/zl5FsyN1lpjVXi1a/scene.splinecode" />
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-          <Button asChild variant="outline">
-            <Link href="/portfolio">
-              <ArrowLeft />
-              Back to Portfolio
-            </Link>
-          </Button>
-        </div>
-      </div>
-    );
+    return <FigmaPortfolio />;
   }
   
   const renderContent = () => {
