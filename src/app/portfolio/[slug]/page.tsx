@@ -19,6 +19,7 @@ import GlitchText from '@/components/glitch-text';
 import BlurText from '@/components/blur-text';
 import { CanvaShowcase } from '@/components/canva-showcase';
 import FlStudioLoader from '@/components/fl-studio-loader';
+import Image from 'next/image';
 
 
 const portfolioItems = [
@@ -79,6 +80,28 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
         );
       case 'canva':
         return <CanvaShowcase />;
+      case 'figma':
+        const figmaImages = [
+          { src: 'https://picsum.photos/seed/figma1/800/600', alt: 'Figma design 1', hint: 'ui design' },
+          { src: 'https://picsum.photos/seed/figma2/800/600', alt: 'Figma design 2', hint: 'wireframe prototype' },
+          { src: 'https://picsum.photos/seed/figma3/800/600', alt: 'Figma design 3', hint: 'mobile app' },
+          { src: 'https://picsum.photos/seed/figma4/800/600', alt: 'Figma design 4', hint: 'dashboard design' },
+          { src: 'https://picsum.photos/seed/figma5/800/600', alt: 'Figma design 5', hint: 'design system' },
+          { src: 'https://picsum.photos/seed/figma6/800/600', alt: 'Figma design 6', hint: 'website layout' },
+        ];
+        return (
+          <div className="flex flex-col items-center space-y-8">
+            <Image
+              src="/figma_logo.png"
+              alt="Figma Logo"
+              width={100}
+              height={100}
+              className="object-contain"
+            />
+            <GlitchText className="text-3xl font-bold">OUR FIGMA DESIGNS</GlitchText>
+            <ImageScroller images={figmaImages} speed="normal" />
+          </div>
+        );
       case 'fl-studio':
         return <FlStudioLoader />;
       case 'unity':
@@ -175,6 +198,8 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
             return 'Here are some of our Blender projects.';
         case 'canva':
             return 'Explore our creative designs made with Canva.';
+        case 'figma':
+            return 'A selection of our designs and prototypes from Figma.';
         case 'fl-studio':
             return 'A selection of our musical works.';
         case 'unity':
