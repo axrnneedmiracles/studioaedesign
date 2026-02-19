@@ -259,7 +259,7 @@ const LightPillar = ({
     }
 
     let lastTime = performance.now();
-    const targetFPS = effectiveQuality === 'low' ? 30 : 60;
+    const targetFPS = effectiveQuality === 'high' ? 60 : 30;
     const frameTime = 1000 / targetFPS;
 
     const animate = (currentTime: number) => {
