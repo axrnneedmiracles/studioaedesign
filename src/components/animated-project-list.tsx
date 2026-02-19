@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useState } from 'react';
 
 const projects = [
   { name: 'Ocean Render', videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview' },
@@ -41,6 +42,8 @@ const itemVariants = {
 };
 
 export function AnimatedProjectList() {
+  const [activeVideo, setActiveVideo] = useState('');
+
   return (
     <motion.ul
       className="w-full max-w-md space-y-4"
@@ -54,7 +57,13 @@ export function AnimatedProjectList() {
           variants={itemVariants}
         >
           {project.videoUrl ? (
-            <Dialog>
+            <Dialog onOpenChange={(open) => {
+              if (open) {
+                setActiveVideo(project.videoUrl!);
+              } else {
+                setActiveVideo('');
+              }
+            }}>
               <DialogTrigger asChild>
                 <div className="bg-card/50 border border-border p-6 rounded-lg text-left text-xl font-semibold text-foreground shadow-md cursor-pointer hover:bg-card/70 transition-colors">
                   {project.name}
@@ -65,14 +74,16 @@ export function AnimatedProjectList() {
                   <DialogTitle className="sr-only">{project.name}</DialogTitle>
                 </DialogHeader>
                 <div className="aspect-video">
-                  <iframe
-                    src={project.videoUrl}
-                    width="100%"
-                    height="100%"
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    className="border-0"
-                  ></iframe>
+                  {activeVideo === project.videoUrl && (
+                    <iframe
+                      src={activeVideo}
+                      width="100%"
+                      height="100%"
+                      allow="autoplay; encrypted-media"
+                      allowFullScreen
+                      className="border-0"
+                    ></iframe>
+                  )}
                 </div>
               </DialogContent>
             </Dialog>

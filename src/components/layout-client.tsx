@@ -24,7 +24,7 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
           pillarRotation={26}
           interactive={false}
           mixBlendMode="screen"
-          quality="medium"
+          quality="low"
         />
       </div>
       {children}

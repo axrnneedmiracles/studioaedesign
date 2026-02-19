@@ -16,10 +16,10 @@ import {
 import { ImageScroller } from '@/components/image-scroller';
 import GlitchText from '@/components/glitch-text';
 import BlurText from '@/components/blur-text';
-import { CanvaShowcase } from '@/components/canva-showcase';
 import FlStudioLoader from '@/components/fl-studio-loader';
 import Image from 'next/image';
 import FigmaPortfolio from '@/components/FigmaPortfolio';
+import CanvaLoader from '@/components/canva-loader';
 
 
 const portfolioItems = [
@@ -83,7 +83,7 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
           </div>
         );
       case 'canva':
-        return <CanvaShowcase />;
+        return <CanvaLoader />;
       case 'fl-studio':
         return <FlStudioLoader />;
       case 'unity':
