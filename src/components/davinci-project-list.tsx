@@ -32,8 +32,8 @@ const projects = [
     imageHint: 'game trailer'
   },
     { 
-    name: 'Short Film Color Grade',
-    videoUrl: 'https://drive.google.com/file/d/1-9P_itD9k3-s7X6S2kM4N8l5iQZk9Yj7/preview',
+    name: 'Short Film',
+    videoUrl: 'https://drive.google.com/file/d/1ouzmsudyA36MSxj3aVyB1SxTa535vmWn/preview',
     imageUrl: 'https://picsum.photos/seed/davinci4/400/225',
     imageHint: 'film scene'
   },
