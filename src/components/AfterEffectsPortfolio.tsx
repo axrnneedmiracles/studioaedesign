@@ -27,12 +27,12 @@ const projects = [
   {
     name: 'Shippy ad',
     videoUrl: 'https://drive.google.com/file/d/1PVgA1o4jivQbhwZl1w3RvJni2usDSfZF/view?usp=drive_link',
-    position: 'absolute top-[40%] left-16 z-10'
+    position: 'absolute top-[45%] left-16 z-10'
   },
   {
     name: 'Game Intro',
     videoUrl: 'https://drive.google.com/file/d/1evq4KHfP9D3KEL644ntheVwrnH1c4I-2/view?usp=drive_link',
-    position: 'absolute top-[40%] right-16 z-10'
+    position: 'absolute top-[45%] right-16 z-10'
   },
   {
     name: 'Stop Motion',
@@ -104,8 +104,8 @@ export default function AfterEffectsPortfolio() {
         </Button>
       </div>
 
-      <div className="absolute bottom-8 right-8 z-10">
-        <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
+      <div className="absolute bottom-4 right-4 z-10">
+        <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 px-8">
           <Link href="/contact">
             Contact Us
           </Link>
