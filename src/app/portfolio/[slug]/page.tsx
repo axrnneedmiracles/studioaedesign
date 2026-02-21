@@ -20,6 +20,7 @@ import FlStudioLoader from '@/components/fl-studio-loader';
 import Image from 'next/image';
 import FigmaPortfolio from '@/components/FigmaPortfolio';
 import CanvaLoader from '@/components/canva-loader';
+import { DaVinciProjectList } from '@/components/davinci-project-list';
 
 
 const portfolioItems = [
@@ -82,6 +83,8 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
             <Model3D />
           </div>
         );
+      case 'davinci':
+        return <DaVinciProjectList />;
       case 'canva':
         return <CanvaLoader />;
       case 'fl-studio':
@@ -177,7 +180,9 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
   const getPageDescription = () => {
     switch (params.slug) {
         case 'blender':
-            return 'Here are some of our Blender projects.';
+            return 'Here are some of our Blender projects. Click to see a preview.';
+        case 'davinci':
+            return 'A selection of our projects edited with DaVinci Resolve. Click to see a preview.';
         case 'canva':
             return 'Explore our creative designs made with Canva.';
         case 'figma':

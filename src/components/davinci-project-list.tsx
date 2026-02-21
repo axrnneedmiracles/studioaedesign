@@ -14,22 +14,28 @@ import { PlayCircle } from 'lucide-react';
 
 const projects = [
   { 
-    name: 'Ocean Render', 
-    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
-    imageUrl: 'https://picsum.photos/seed/blender1/400/225',
-    imageHint: 'ocean render'
+    name: 'Cinematic Travel Vlog',
+    videoUrl: 'https://drive.google.com/file/d/1-9P_itD9k3-s7X6S2kM4N8l5iQZk9Yj7/preview', 
+    imageUrl: 'https://picsum.photos/seed/davinci1/400/225',
+    imageHint: 'travel video'
   },
   { 
-    name: 'Abstract Sphere',
-    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
-    imageUrl: 'https://picsum.photos/seed/blender2/400/225',
-    imageHint: 'abstract 3d'
+    name: 'Corporate Ad',
+    videoUrl: 'https://drive.google.com/file/d/1-9P_itD9k3-s7X6S2kM4N8l5iQZk9Yj7/preview',
+    imageUrl: 'https://picsum.photos/seed/davinci2/400/225',
+    imageHint: 'corporate office'
   },
   { 
-    name: 'Character Model',
-    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
-    imageUrl: 'https://picsum.photos/seed/blender3/400/225',
-    imageHint: '3d character'
+    name: 'Music Video Edit',
+    videoUrl: 'https://drive.google.com/file/d/1-9P_itD9k3-s7X6S2kM4N8l5iQZk9Yj7/preview',
+    imageUrl: 'https://picsum.photos/seed/davinci3/400/225',
+    imageHint: 'music performance'
+  },
+    { 
+    name: 'Short Film Color Grade',
+    videoUrl: 'https://drive.google.com/file/d/1-9P_itD9k3-s7X6S2kM4N8l5iQZk9Yj7/preview',
+    imageUrl: 'https://picsum.photos/seed/davinci4/400/225',
+    imageHint: 'film scene'
   },
 ];
 
@@ -38,30 +44,31 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15,
       delayChildren: 0.2,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { x: -20, opacity: 0 },
+  hidden: { y: 20, opacity: 0, scale: 0.95 },
   visible: {
-    x: 0,
+    y: 0,
     opacity: 1,
+    scale: 1,
     transition: {
-      ease: 'easeOut',
-      duration: 0.5,
+      ease: [0.25, 1, 0.5, 1],
+      duration: 0.8,
     },
   },
 };
 
-export function AnimatedProjectList() {
+export function DaVinciProjectList() {
   const [activeVideo, setActiveVideo] = useState('');
 
   return (
     <motion.div
-      className="w-full max-w-md space-y-4"
+      className="grid grid-cols-1 md:grid-cols-2 gap-8"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -88,8 +95,10 @@ export function AnimatedProjectList() {
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     data-ai-hint={project.imageHint}
                   />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <PlayCircle className="h-12 w-12 text-white/80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end justify-start p-4">
+                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <PlayCircle className="h-16 w-16 text-white/80 transform-gpu transition-transform group-hover:scale-110" />
+                     </div>
                   </div>
                 </div>
                 <h3 className="p-4 text-lg font-semibold">{project.name}</h3>
