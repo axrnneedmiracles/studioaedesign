@@ -32,7 +32,7 @@ const projects = [
   {
     name: 'Game Intro',
     videoUrl: 'https://drive.google.com/file/d/1evq4KHfP9D3KEL644ntheVwrnH1c4I-2/preview',
-    position: 'absolute top-[45%] right-16 z-10'
+    position: 'absolute top-[38%] right-16 z-10'
   },
   {
     name: 'Stop Motion',
