@@ -20,8 +20,8 @@ const projects = [
     imageHint: 'travel video'
   },
   { 
-    name: 'Corporate Ad',
-    videoUrl: 'https://drive.google.com/file/d/1-9P_itD9k3-s7X6S2kM4N8l5iQZk9Yj7/preview',
+    name: 'Ad',
+    videoUrl: 'https://drive.google.com/file/d/1JFz1BNRSxEB-DC3z92_27gJsbZ_BgEP5/preview',
     imageUrl: 'https://picsum.photos/seed/davinci2/400/225',
     imageHint: 'corporate office'
   },
