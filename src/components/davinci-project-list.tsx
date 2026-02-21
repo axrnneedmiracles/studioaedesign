@@ -16,25 +16,25 @@ const projects = [
   { 
     name: 'Cinematic Travel Vlog',
     videoUrl: 'https://drive.google.com/file/d/1ouzmsudyA36MSxj3aVyB1SxTa535vmWn/preview', 
-    imageUrl: 'https://picsum.photos/seed/davinci1/400/225',
+    imageUrl: 'https://picsum.photos/seed/travel-vlog/400/225',
     imageHint: 'travel video'
   },
   { 
     name: 'Ad',
     videoUrl: 'https://drive.google.com/file/d/1JFz1BNRSxEB-DC3z92_27gJsbZ_BgEP5/preview',
-    imageUrl: 'https://picsum.photos/seed/davinci2/400/225',
+    imageUrl: 'https://picsum.photos/seed/corp-ad/400/225',
     imageHint: 'corporate office'
   },
   { 
     name: 'Game Trailer',
     videoUrl: 'https://drive.google.com/file/d/1evq4KHfP9D3KEL644ntheVwrnH1c4I-2/preview',
-    imageUrl: 'https://picsum.photos/seed/davinci3/400/225',
+    imageUrl: 'https://picsum.photos/seed/game-trailer/400/225',
     imageHint: 'game trailer'
   },
     { 
     name: 'Short Film',
     videoUrl: 'https://drive.google.com/file/d/1ouzmsudyA36MSxj3aVyB1SxTa535vmWn/preview',
-    imageUrl: 'https://picsum.photos/seed/davinci4/400/225',
+    imageUrl: 'https://picsum.photos/seed/short-film/400/225',
     imageHint: 'film scene'
   },
 ];
