@@ -27,7 +27,7 @@ const projects = [
   {
     name: 'Ad',
     videoUrl: 'https://drive.google.com/file/d/1JFz1BNRSxEB-DC3z92_27gJsbZ_BgEP5/preview',
-    position: 'absolute top-[45%] left-1/2 -translate-x-1/2 z-10'
+    position: 'absolute top-[40%] left-16 z-10'
   },
   {
     name: 'Game Intro',
