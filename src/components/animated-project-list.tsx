@@ -19,6 +19,10 @@ const projects = [
     name: 'Abstract Sphere',
     videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
   },
+  {
+    name: 'Ad Water Simulation',
+    videoUrl: 'https://drive.google.com/file/d/1x7z3V6T41AgZpDIEEAVo-BDG7LVWh73v/preview',
+  },
   { 
     name: 'Character Model',
     videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
