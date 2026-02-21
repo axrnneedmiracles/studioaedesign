@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -15,7 +14,6 @@ import { motion } from 'framer-motion';
 
 export function DevelopmentWarning() {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const hasSeenWarning = sessionStorage.getItem('devWarningShown');
@@ -31,7 +29,7 @@ export function DevelopmentWarning() {
 
   const handleGoToPortfolio = () => {
     handleClose();
-    router.push('/portfolio');
+    window.location.href = 'https://drive.google.com/drive/folders/11-dcScAtWQ-Z3rUCUBnsYQ4hjWA7dhL9?usp=drive_link';
   };
 
   return (
