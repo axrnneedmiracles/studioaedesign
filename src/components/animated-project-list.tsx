@@ -9,27 +9,19 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from 'react';
-import Image from 'next/image';
-import { PlayCircle } from 'lucide-react';
 
 const projects = [
   { 
     name: 'Ocean Render', 
     videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
-    imageUrl: 'https://picsum.photos/seed/blender1/400/225',
-    imageHint: 'ocean render'
   },
   { 
     name: 'Abstract Sphere',
     videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
-    imageUrl: 'https://picsum.photos/seed/blender2/400/225',
-    imageHint: 'abstract 3d'
   },
   { 
     name: 'Character Model',
     videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
-    imageUrl: 'https://picsum.photos/seed/blender3/400/225',
-    imageHint: '3d character'
   },
 ];
 
@@ -79,20 +71,8 @@ export function AnimatedProjectList() {
             }
           }}>
             <DialogTrigger asChild>
-              <div className="group relative bg-card/50 border border-border rounded-lg text-left text-foreground shadow-md cursor-pointer hover:bg-card/70 transition-colors overflow-hidden">
-                <div className="relative aspect-video">
-                  <Image 
-                    src={project.imageUrl} 
-                    alt={`Preview for ${project.name}`}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    data-ai-hint={project.imageHint}
-                  />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <PlayCircle className="h-12 w-12 text-white/80" />
-                  </div>
-                </div>
-                <h3 className="p-4 text-lg font-semibold">{project.name}</h3>
+              <div className="bg-card/50 border border-border p-6 rounded-lg text-left text-xl font-semibold text-foreground shadow-md cursor-pointer hover:bg-card/70 transition-colors">
+                {project.name}
               </div>
             </DialogTrigger>
             <DialogContent className="max-w-4xl h-auto p-0 border-0 overflow-hidden">
