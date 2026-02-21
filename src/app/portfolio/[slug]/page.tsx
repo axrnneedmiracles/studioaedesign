@@ -21,7 +21,7 @@ import Image from 'next/image';
 import FigmaPortfolio from '@/components/FigmaPortfolio';
 import CanvaLoader from '@/components/canva-loader';
 import { DaVinciProjectList } from '@/components/davinci-project-list';
-import { AfterEffectsProjectList } from '@/components/after-effects-project-list';
+import AfterEffectsPortfolio from '@/components/AfterEffectsPortfolio';
 
 
 const portfolioItems = [
@@ -74,6 +74,10 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
   if (params.slug === 'figma') {
     return <FigmaPortfolio />;
   }
+
+  if (params.slug === 'after-effects') {
+    return <AfterEffectsPortfolio />;
+  }
   
   const renderContent = () => {
     switch (params.slug) {
@@ -88,8 +92,6 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
         return <DaVinciProjectList />;
       case 'canva':
         return <CanvaLoader />;
-      case 'after-effects':
-        return <AfterEffectsProjectList />;
       case 'fl-studio':
         return <FlStudioLoader />;
       case 'unity':
@@ -187,7 +189,7 @@ export default function PortfolioSamplePage({ params }: { params: { slug:string 
         case 'davinci':
             return 'A selection of our projects edited with DaVinci Resolve. Click to see a preview.';
         case 'after-effects':
-            return 'A selection of our projects created with After Effects. Click to see a preview.';
+            return 'An interactive 3D showcase of our work.';
         case 'canva':
             return 'Explore our creative designs made with Canva.';
         case 'figma':
