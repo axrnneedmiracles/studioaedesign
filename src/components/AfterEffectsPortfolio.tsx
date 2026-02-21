@@ -103,6 +103,14 @@ export default function AfterEffectsPortfolio() {
           </Link>
         </Button>
       </div>
+
+      <div className="absolute bottom-8 right-8 z-10">
+        <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
+          <Link href="/contact">
+            Contact Us
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 }
