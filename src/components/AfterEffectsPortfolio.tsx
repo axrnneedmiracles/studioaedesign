@@ -27,7 +27,7 @@ const projects = [
   {
     name: 'Shippy ad',
     videoUrl: 'https://drive.google.com/file/d/1PVgA1o4jivQbhwZl1w3RvJni2usDSfZF/view?usp=drive_link',
-    position: 'absolute top-[45%] left-24 z-10'
+    position: 'absolute top-[45%] left-16 z-10'
   },
   {
     name: 'Game Intro',
