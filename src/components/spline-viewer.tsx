@@ -1,4 +1,3 @@
-
 'use client'
 
 import { useEffect } from 'react'
@@ -10,6 +9,7 @@ declare global {
       'spline-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
         url: string;
         style?: React.CSSProperties;
+        'loading-anim-type'?: string;
       }, HTMLElement>;
     }
   }
@@ -21,6 +21,7 @@ export default function SplineViewer({ url }: { url: string }) {
     if (!document.querySelector('script[src*="@splinetool/viewer"]')) {
       const script = document.createElement('script')
       script.type = 'module'
+      script.async = true
       script.src =
         'https://unpkg.com/@splinetool/viewer@1.12.58/build/spline-viewer.js'
       document.head.appendChild(script)
@@ -30,6 +31,7 @@ export default function SplineViewer({ url }: { url: string }) {
   return (
       <spline-viewer
         url={url}
+        loading-anim-type="spinner-small-light"
         style={{
           width: '100%',
           height: '100%',
