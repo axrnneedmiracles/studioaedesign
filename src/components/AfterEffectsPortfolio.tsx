@@ -25,23 +25,23 @@ const SplineViewer = dynamic(() => import('@/components/spline-viewer'), {
 
 const projects = [
   {
-    name: 'Ad',
-    videoUrl: 'https://drive.google.com/file/d/1JFz1BNRSxEB-DC3z92_27gJsbZ_BgEP5/preview',
-    position: 'absolute top-[40%] left-16 z-10'
+    name: 'Shippy ad',
+    videoUrl: 'https://drive.google.com/file/d/1PVgA1o4jivQbhwZl1w3RvJni2usDSfZF/view?usp=drive_link',
+    position: 'absolute top-[45%] left-24 z-10'
   },
   {
     name: 'Game Intro',
-    videoUrl: 'https://drive.google.com/file/d/1evq4KHfP9D3KEL644ntheVwrnH1c4I-2/preview',
-    position: 'absolute top-[40%] right-16 z-10'
+    videoUrl: 'https://drive.google.com/file/d/1evq4KHfP9D3KEL644ntheVwrnH1c4I-2/view?usp=drive_link',
+    position: 'absolute top-[45%] right-16 z-10'
   },
   {
     name: 'Stop Motion',
-    videoUrl: 'https://drive.google.com/file/d/14SXVioCcWxXX8WnclM_iuK5LVH3JBcCi/preview',
+    videoUrl: 'https://drive.google.com/file/d/14SXVioCcWxXX8WnclM_iuK5LVH3JBcCi/view?usp=drive_link',
     position: 'absolute bottom-24 left-16 z-10'
   },
   {
     name: 'Cinematic Scene',
-    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
+    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/view?usp=drive_link',
     position: 'absolute bottom-24 right-16 z-10'
   }
 ];
@@ -80,7 +80,7 @@ export default function AfterEffectsPortfolio() {
                     {/* The iframe is only rendered when this specific dialog is open */}
                     {activeProjectName === project.name && (
                     <iframe
-                        src={project.videoUrl}
+                        src={project.videoUrl.replace('/view?usp=drive_link', '/preview')}
                         width="100%"
                         height="100%"
                         allow="autoplay; encrypted-media"
