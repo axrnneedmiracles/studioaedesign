@@ -26,17 +26,17 @@ const SplineViewer = dynamic(() => import('@/components/spline-viewer'), {
 const projects = [
   {
     name: 'Ad',
-    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview', // placeholder
+    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
     position: 'absolute top-[45%] left-1/2 -translate-x-1/2 z-10'
   },
   {
     name: 'Game Intro',
-    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview', // placeholder
+    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
     position: 'absolute top-[45%] right-16 z-10'
   },
   {
     name: 'Stop Motion',
-    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview', // placeholder
+    videoUrl: 'https://drive.google.com/file/d/11POtYbAOTh73WKcX4izQ85cOdNCGkXN_/preview',
     position: 'absolute bottom-24 left-16 z-10'
   },
   {
