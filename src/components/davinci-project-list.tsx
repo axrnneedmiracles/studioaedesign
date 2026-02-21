@@ -26,10 +26,10 @@ const projects = [
     imageHint: 'corporate office'
   },
   { 
-    name: 'Music Video Edit',
-    videoUrl: 'https://drive.google.com/file/d/1-9P_itD9k3-s7X6S2kM4N8l5iQZk9Yj7/preview',
+    name: 'Game Trailer',
+    videoUrl: 'https://drive.google.com/file/d/1evq4KHfP9D3KEL644ntheVwrnH1c4I-2/preview',
     imageUrl: 'https://picsum.photos/seed/davinci3/400/225',
-    imageHint: 'music performance'
+    imageHint: 'game trailer'
   },
     { 
     name: 'Short Film Color Grade',
